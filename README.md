@@ -10,7 +10,7 @@ Best Practices:
 https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/
 
 #Apache-Kafka
-http://kafka.apache.org/07/quickstart.html
+Quickstart: http://kafka.apache.org/07/quickstart.html
 
 #Apache-Spark
 Kafka + Spark Integration Guide: http://spark.apache.org/docs/latest/streaming-kafka-integration.html
