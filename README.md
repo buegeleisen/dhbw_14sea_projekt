@@ -7,3 +7,11 @@ https://docs.docker.com/engine/userguide/intro/
 
 Best Practices:
 https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/
+
+#Apache-Kafka
+
+#Apache-Spark
+
+#UI
+
+#Database
