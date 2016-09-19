@@ -11,6 +11,7 @@ https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/
 #Apache-Kafka
 
 #Apache-Spark
+Kafka + Spark Integration Guide: http://spark.apache.org/docs/latest/streaming-kafka-integration.html
 
 #UI
 
