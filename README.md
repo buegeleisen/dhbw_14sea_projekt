@@ -13,6 +13,7 @@ https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/
 
 #Apache-Spark
 Kafka + Spark Integration Guide: http://spark.apache.org/docs/latest/streaming-kafka-integration.html
+Programming Guide: http://spark.apache.org/docs/latest/streaming-programming-guide.html
 
 #UI
 
