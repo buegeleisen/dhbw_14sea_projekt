@@ -1,21 +1,14 @@
 import React, { Component } from 'react';
 import Navbar from './Navbar.jsx';
 import Index from './Index.jsx';
+import Machines from './Machines.jsx';
 
-const dashboard = (
-<div className="">
+export const dashboard = ({content}) => (
+<div className="dashboard">
   <Navbar/>
-  <Index/>
+  <div className="dashboard-layout">
+    {content}
+  </div>
 </div>
 
 );
-
-export default React.createClass({
-
-
-  render() {
-      return (
-          dashboard
-            );
-        }
-  });
