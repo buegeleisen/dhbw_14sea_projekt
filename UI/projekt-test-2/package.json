@@ -19,6 +19,7 @@
     "react-dom": "^15.3.2",
     "react-easy-chart": "^0.1.12",
     "react-faux-dom": "^2.5.0",
-    "react-fontawesome": "^1.2.0"
+    "react-fontawesome": "^1.2.0",
+    "react-mounter": "^1.2.0"
   }
 }
