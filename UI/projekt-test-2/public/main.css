@@ -16,6 +16,14 @@ body{
 
 }
 
+.ja{
+  color: #D84315;
+}
+
+.com{
+  color: white;
+}
+
 .background{
   height: 100%;
   position: relative;
@@ -85,9 +93,17 @@ body{
     padding: 15px 40px;
 }
 
+h1.section-heading {
+    font-size: 36px;
+    text-transform: none;
+    font-weight: 400;
+    text-align: center;
+}
+
 .panel {
     transition: box-shadow 0.5s;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
+    margin-top: 50px;
 }
 
 .panel:hover {
@@ -101,8 +117,8 @@ body{
 }
 
 .panel-heading {
-    color: #fff !important;
-    background-color: black !important;
+    color: #D84315 !important;
+    background-color: #222 !important;
     padding: 25px;
     border-bottom: 1px solid transparent;
     border-top-left-radius: 0px;
