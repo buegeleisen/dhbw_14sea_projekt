@@ -12,9 +12,9 @@ const navbarInstance = (
     </Navbar.Header>
     <Navbar.Collapse>
       <Nav>
-        <NavItem eventKey={1} href="#">Machine Overview</NavItem>
-        <NavItem eventKey={2} href="#">Customer Center</NavItem>
-        <NavItem eventKey={2} href="#">Product Analysis</NavItem>
+        <NavItem eventKey={1} href="machines">Machine Overview</NavItem>
+        <NavItem eventKey={2} href="customerCenter">Customer Center</NavItem>
+        <NavItem eventKey={3} href="productAnalysis">Product Analysis</NavItem>
       </Nav>
       <Navbar.Form pullRight>
           <FormGroup>
