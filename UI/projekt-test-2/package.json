@@ -5,6 +5,7 @@
     "start": "meteor run"
   },
   "dependencies": {
+    "chart.js": "^2.3.0",
     "d3": "^3.5.17",
     "d3-array": "^0.8.1",
     "d3-scale": "^0.9.3",
@@ -14,6 +15,7 @@
     "react": "^15.3.2",
     "react-addons-pure-render-mixin": "^15.3.2",
     "react-bootstrap": "^0.30.5",
+    "react-chartjs-2": "^1.4.0",
     "react-dom": "^15.3.2",
     "react-easy-chart": "^0.1.12",
     "react-faux-dom": "^2.5.0",
