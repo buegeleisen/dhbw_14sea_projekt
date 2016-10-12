@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import TemperatureChart from './TemperatureChart.jsx';
+import LineChart from './LineChart.jsx';
 import {Panel} from 'react-bootstrap';
 
-const title = (
-<h3>Temperature Chart</h3>
-);
+
 
 
 const machines = (
@@ -14,23 +12,23 @@ const machines = (
       <h1 className="section-heading">Machine Overview</h1>
     </div>
     <div className="col-md-6">
-      <Panel header={title}>
-        <TemperatureChart />
-      </Panel>
-    </div>
-    <div className="col-md-6">
-      <Panel header="Drilling Speed">
-        <TemperatureChart />
+      <Panel header="Milling Temperature">
+        <div><LineChart labelName="Milling Temperature" /></div>
       </Panel>
     </div>
     <div className="col-md-6">
       <Panel header="Milling Speed">
-        <TemperatureChart />
+        <LineChart labelName="Milling Speed"/>
       </Panel>
     </div>
     <div className="col-md-6">
-      <Panel header="Other Stuff">
-        <TemperatureChart />
+      <Panel header="Drilling Temperature">
+        <LineChart labelName="Drilling Temperature" />
+      </Panel>
+    </div>
+    <div className="col-md-6">
+      <Panel header="Drilling Speed">
+        <LineChart labelName="Drilling Speed"/>
       </Panel>
     </div>
   </div>
