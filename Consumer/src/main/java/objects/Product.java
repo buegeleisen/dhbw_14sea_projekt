@@ -5,11 +5,11 @@ package objects;
  */
 public class Product {
     private ERPFile erpFile;
-    private Message[] messages;
+    private KafkaMessage[] messages;
     //Variablen von ActiveMQ
 
 
-    public Product(ERPFile erpFile, Message[] messages) {
+    public Product(ERPFile erpFile, KafkaMessage[] messages) {
         this.erpFile = erpFile;
         this.messages = messages;
     }
@@ -22,11 +22,11 @@ public class Product {
         this.erpFile = erpFile;
     }
 
-    public Message[] getMessages() {
+    public KafkaMessage[] getMessages() {
         return messages;
     }
 
-    public void setMessages(Message[] messages) {
+    public void setMessages(KafkaMessage[] messages) {
         this.messages = messages;
     }
 }
