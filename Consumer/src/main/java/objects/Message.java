@@ -17,4 +17,36 @@ public class Message {
         this.itemName = itemName;
         this.timestamp = timestamp;
     }
+
+    public boolean isValue() {
+        return value;
+    }
+
+    public void setValue(boolean value) {
+        this.value = value;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public BigInteger getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(BigInteger timestamp) {
+        this.timestamp = timestamp;
+    }
 }
