@@ -1,12 +1,12 @@
+package kafka;
+
 import com.google.common.collect.ImmutableMap;
 import com.google.common.util.concurrent.AbstractExecutionThreadService;
 import kafka.consumer.ConsumerConfig;
 
-import kafka.consumer.ConsumerIterator;
 import kafka.consumer.KafkaStream;
 import kafka.javaapi.consumer.ConsumerConnector;
 import kafka.message.MessageAndMetadata;
-import org.apache.log4j.BasicConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,7 +57,7 @@ public class Consumer extends AbstractExecutionThreadService {
     }
 
     public void run() {
-        logger.info("Starting the Consumer...");
+        logger.info("Starting the kafka.Consumer...");
 
         ConsumerConnector connector = kafka.consumer.Consumer.createJavaConsumerConnector(consumerConfig);
         Map<String, List<KafkaStream<byte[], byte[]>>> messages = connector.createMessageStreams(ImmutableMap.of(topicName, 1));
