@@ -16,11 +16,19 @@ body{
 
 }
 
-.ja{
+.logo{
+  padding: 15px;
+}
+
+.logo p{
+  display:inline;
+}
+
+p.ja{
   color: #D84315;
 }
 
-.com{
+p.com{
   color: white;
 }
 

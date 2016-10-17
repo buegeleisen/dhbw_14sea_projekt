@@ -1,17 +1,13 @@
 import React, {Component, PropTypes} from 'react';
 import {Line} from 'react-chartjs-2';
-import { LineChartData } from '../api/chartData.js';
-import { createContainer } from 'meteor/react-meteor-data';
 
 
-class LineChartNew extends Component{
+export default class LineChart extends Component{
     render() {
-
-
          const data = {
             datasets: [{
             label: this.props.labelName,
-            data: this.props.linechartdata,
+            data: this.props.lineChartData,
             fill: false,
             lineTension: 0.1,
             backgroundColor: "rgba(75,192,192,0.4)",
@@ -57,13 +53,7 @@ class LineChartNew extends Component{
         }
 };
 
-LineChartNew.propTypes = {
-  linechartdata: PropTypes.array.isRequired,
+LineChart.propTypes = {
+  lineChartData: PropTypes.array,
   labelName: PropTypes.string
 };
-
-export default createContainer(() => {
-  return {
-    linechartdata: LineChartData.find({}, {sort:{_id:-1},limit: 5} ).fetch(),
-  };
-}, LineChartNew);
