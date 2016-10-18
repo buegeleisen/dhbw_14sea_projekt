@@ -1,12 +1,5 @@
-package kafka;
-import javax.jms.Connection;
-import javax.jms.Destination;
-import javax.jms.JMSException;
-import javax.jms.Message;
-import javax.jms.MessageConsumer;
-import javax.jms.MessageListener;
-import javax.jms.Session;
-import javax.jms.TextMessage;
+package activemq;
+import javax.jms.*;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 
@@ -72,4 +65,6 @@ public class ActivemqConsumer implements Runnable {
 
         }
     }
+
+
 }
