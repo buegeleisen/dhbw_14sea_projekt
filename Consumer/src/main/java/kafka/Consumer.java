@@ -33,17 +33,12 @@ public class Consumer extends AbstractExecutionThreadService {
     private static final String PARTITION = "partition.assignment.strategy";
 
 
-    private Consumer(String server, String topicName){
+    public Consumer(String server, String topicName){
         //BasicConfigurator.configure();
         Properties properties = new Properties();
         putProperties(properties, server);
         this.consumerConfig = new ConsumerConfig(properties);
         this.topicName = topicName;
-    }
-
-    public static void main(String[] args) {
-        Consumer consumer = new Consumer("192.168.99.100:1001", "prod");
-        consumer.start();
     }
 
     private void putProperties(Properties properties, String server) {
