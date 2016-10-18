@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import {Navbar, Nav, NavItem, Glyphicon, FormGroup, ControlLabel, FormControl} from 'react-bootstrap';
-
+import JaCom from './JaCom.jsx';
 
 const navbarInstance = (
   <Navbar inverse>
     <Navbar.Header>
       <Navbar.Brand>
-        <img src="logo_red_white.png" />
+        <JaCom route="/"/>
       </Navbar.Brand>
       <Navbar.Toggle />
     </Navbar.Header>
