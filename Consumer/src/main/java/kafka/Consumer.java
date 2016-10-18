@@ -69,7 +69,7 @@ public class Consumer extends AbstractExecutionThreadService {
                 public void run(){
                     for (MessageAndMetadata<byte[], byte[]> messageAndMetadata : messageStream) {
                         String message = new String(messageAndMetadata.message());
-                        test(message);
+                        //test(message);
                         logger.info("Received: {}", message);
                     }
                 }
