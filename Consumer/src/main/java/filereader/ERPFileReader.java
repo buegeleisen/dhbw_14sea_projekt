@@ -9,7 +9,6 @@ import objects.ERPFile;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.util.Vector;
 import java.nio.file.StandardWatchEventKinds;
 import java.nio.file.Path;
@@ -22,7 +21,7 @@ import java.util.List;
 
 
 public class ERPFileReader implements Runnable {
-
+    private Gson gson = new Gson();
     private String observedPath;
     private String processedPath;
 
@@ -34,7 +33,6 @@ public class ERPFileReader implements Runnable {
     }
 
     private void read() throws Exception {
-        Gson gson = new Gson();
         File f = new File(observedPath);
         File[] fileArray = f.listFiles();
         String erppath;
