@@ -22,6 +22,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Consumer extends AbstractExecutionThreadService {
+
     private String topicName;
     private Logger logger = LoggerFactory.getLogger(Consumer.class);
 
@@ -69,7 +70,9 @@ public class Consumer extends AbstractExecutionThreadService {
                 public void run(){
                     for (MessageAndMetadata<byte[], byte[]> messageAndMetadata : messageStream) {
                         String message = new String(messageAndMetadata.message());
-                        //test(message);
+
+                        // to spark and Statemachine
+
                         logger.info("Received: {}", message);
                     }
                 }
@@ -78,10 +81,7 @@ public class Consumer extends AbstractExecutionThreadService {
 
     }
 
-    private void test(String s){
-        KafkaMessage kafkaMessage = gson.fromJson(s, KafkaMessage.class);
-        Main.meteorMapper.map(kafkaMessage);
-    }
+
 
 
 }
