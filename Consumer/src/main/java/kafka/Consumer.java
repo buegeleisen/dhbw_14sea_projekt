@@ -2,11 +2,14 @@ package kafka;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.util.concurrent.AbstractExecutionThreadService;
+import com.google.gson.Gson;
 import kafka.consumer.ConsumerConfig;
 
 import kafka.consumer.KafkaStream;
 import kafka.javaapi.consumer.ConsumerConnector;
 import kafka.message.MessageAndMetadata;
+import main.Main;
+import objects.KafkaMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,6 +34,8 @@ public class Consumer extends AbstractExecutionThreadService {
     private static final String KEY_DESERIALIZE = "key.deserializer";
     private static final String VALUE_DESERIALIZE = "value.deserializer";
     private static final String PARTITION = "partition.assignment.strategy";
+
+    private Gson gson = new Gson();
 
 
     public Consumer(String server, String topicName){
@@ -63,12 +68,20 @@ public class Consumer extends AbstractExecutionThreadService {
             executorService.submit(new Runnable() {
                 public void run(){
                     for (MessageAndMetadata<byte[], byte[]> messageAndMetadata : messageStream) {
-                        logger.info("Received: {}", new String(messageAndMetadata.message()));
+                        String message = new String(messageAndMetadata.message());
+                        //test(message);
+                        logger.info("Received: {}", message);
                     }
                 }
             });
         }
 
-
     }
+
+    private void test(String s){
+        KafkaMessage kafkaMessage = gson.fromJson(s, KafkaMessage.class);
+        Main.meteorMapper.map(kafkaMessage);
+    }
+
+
 }
