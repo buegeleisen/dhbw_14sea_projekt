@@ -2,7 +2,11 @@
  * Created by cwecker on 15.10.2016.
  */
 
+package filereader;
+
 import com.google.gson.Gson;
+import objects.ERPFile;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -17,28 +21,29 @@ import java.nio.file.Files;
 import java.util.List;
 
 
-public class FileReader22 {
+public class ERPFileReader implements Runnable {
 
-    private static final String path = "C:/Users/cwecker/Documents/ERPData_jarFile/ERPs/";
-    private static final String endpath = "C:/Users/cwecker/Documents/ERPData_jarFile/ERPs_gelesen/";
+    private String observedPath;
+    private String processedPath;
+
     private static Vector<ERPFile> erpfiles = new Vector<ERPFile>();
 
-    public static void main(String[] args) throws Exception {
-        read();
-        watch();
+    public ERPFileReader(String observedPath, String processedPath){
+        this.observedPath = observedPath;
+        this.processedPath = processedPath;
     }
 
-    public static void read() throws Exception {
+    private void read() throws Exception {
         Gson gson = new Gson();
-        File f = new File(path);
+        File f = new File(observedPath);
         File[] fileArray = f.listFiles();
         String erppath;
         Path moveSourcePath = null;
         Path moveTargetPath = null;
 
         for (int i = 0; i < fileArray.length; i++) {
-            erppath = path + fileArray[i].getName();
-            BufferedReader input = new BufferedReader(new FileReader(erppath));
+            erppath = observedPath + fileArray[i].getName();
+            BufferedReader input = new BufferedReader(new java.io.FileReader(erppath));
             String zeile = null;
             zeile = input.readLine();
             while (zeile != null) {
@@ -50,16 +55,16 @@ public class FileReader22 {
             }
             input.close();
             moveSourcePath = Paths.get(erppath);
-            moveTargetPath = Paths.get(endpath + fileArray[i].getName());
+            moveTargetPath = Paths.get(processedPath + fileArray[i].getName());
             Files.move (moveSourcePath, moveTargetPath);
 
             }
 
     }
 
-    public static void watch () throws Exception {
+    private void watch () throws Exception {
 
-        Path watchpath = Paths.get(path);
+        Path watchpath = Paths.get(observedPath);
         WatchService watcher = watchpath.getFileSystem().newWatchService();
         watchpath.register(watcher, StandardWatchEventKinds.ENTRY_CREATE, StandardWatchEventKinds.ENTRY_DELETE, StandardWatchEventKinds.ENTRY_MODIFY);
 
@@ -73,5 +78,17 @@ public class FileReader22 {
         }
 
 
+    }
+
+    public void run() {
+        try {
+            //initial read
+            read();
+
+            //watching files
+            watch();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
