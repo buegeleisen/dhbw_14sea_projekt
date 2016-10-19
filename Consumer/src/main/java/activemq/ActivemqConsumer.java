@@ -6,12 +6,7 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 public class ActivemqConsumer implements Runnable {
     Session session = null;
     Connection connection = null;
-    String dest = "";
-
-    public static void main(String[] args) {
-        Thread t = new Thread(new ActivemqConsumer("tcp://localhost:32780"));
-        t.start();
-    }
+    String dest;
 
     public ActivemqConsumer(String dest) {
         this.dest = dest;
