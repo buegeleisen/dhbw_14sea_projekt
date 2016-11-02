@@ -12,6 +12,7 @@ html,body {
 body{
     height:100%;
     color: black;
+    background-color: #222 !important;
     font-family:"Montserrat",Helvetica,Arial,sans-serif;
 
 }
@@ -93,6 +94,28 @@ body{
   color: #D84315;
 }
 
+.productList .panel{
+  margin-top: 20px;
+  margin-bottom: 0px;
+}
+
+.myPanel{
+
+}
+
+.myPanel p{
+  margin: 0px;
+  display: inline;
+}
+
+.myPanel .click{
+  text-align: center;
+}
+
+.myPanel .glyphicon{
+  color: #D84315;
+}
+
 @media(max-width: @screen-sm-min) {
     .intro {
         height: auto;
@@ -136,6 +159,7 @@ body{
 
 h1.section-heading {
     font-size: 36px;
+    color: white;
     text-transform: none;
     font-weight: 400;
     text-align: center;
@@ -148,7 +172,7 @@ h1.section-heading {
 }
 
 .panel:hover {
-    box-shadow: 5px 0px 40px rgba(0,0,0, .5);
+    box-shadow: 5px 0px 40px rgba(255,255,255, .5);
 }
 
 .panel-footer .btn:hover {
@@ -159,7 +183,7 @@ h1.section-heading {
 
 .panel-heading {
     color: #D84315 !important;
-    background-color: #222 !important;
+    background-color: white !important;
     padding: 25px;
     border-bottom: 1px solid transparent;
     border-top-left-radius: 0px;
