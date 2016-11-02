@@ -45,3 +45,13 @@ FlowRouter.route('/products', {
       )
   }
 });
+
+FlowRouter.route('/products/:_id', {
+  action() {
+      mount(dashboard, {
+        content: (<ProductLayout/>)
+      }
+
+      )
+  }
+});
