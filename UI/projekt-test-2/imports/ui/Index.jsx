@@ -17,7 +17,7 @@ const index = (
       <div className="col-md-4 item">
         <Glyphicon className="sticker" glyph="signal" />
         <h4>NICE CHARTS</h4>
-        <p>We used ChartJS 2 to display the data</p>
+        <p>We are using ChartJS 2 to display the data</p>
       </div>
       <div className="col-md-4 item">
         <Glyphicon className="sticker" glyph="time" />
