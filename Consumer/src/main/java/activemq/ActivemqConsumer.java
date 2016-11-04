@@ -2,6 +2,7 @@ package activemq;
 import javax.jms.*;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
+import spark.SparkConsumer;
 
 public class ActivemqConsumer implements Runnable {
     Session session = null;
@@ -39,8 +40,10 @@ public class ActivemqConsumer implements Runnable {
                         } catch (JMSException e) {
                             e.printStackTrace();
                         }
+                        SparkConsumer.getActivemqString(text);
                         System.out.println("Received: " + text);
                     } else {
+                        SparkConsumer.getActivemqString(message.toString());
                         System.out.println("Received: " + message);
                     }
                 }

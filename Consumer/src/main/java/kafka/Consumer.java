@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.apache.kafka.common.serialization.StringDeserializer;
+import spark.SparkConsumer;
 
 import java.util.List;
 import java.util.Map;
@@ -70,6 +71,7 @@ public class Consumer extends AbstractExecutionThreadService {
                 public void run(){
                     for (MessageAndMetadata<byte[], byte[]> messageAndMetadata : messageStream) {
                         String message = new String(messageAndMetadata.message());
+                        SparkConsumer.getKafkaString(message);
 
                         // to spark and Statemachine
 
