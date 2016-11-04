@@ -12,23 +12,30 @@ html,body {
 body{
     height:100%;
     color: black;
+    background-color: #222 !important;
     font-family:"Montserrat",Helvetica,Arial,sans-serif;
 
 }
 
+.navbar-brand img{
+    width: auto;
+    height: auto;
+}
+
 .logo{
   padding: 15px;
+  text-align: center;
 }
 
 .logo p{
   display:inline;
 }
 
-p.ja{
+.ja{
   color: #D84315;
 }
 
-p.com{
+.com{
   color: white;
 }
 
@@ -36,7 +43,7 @@ p.com{
   height: 100%;
   position: relative;
   min-height: 350px;
-  background: url(data_center.jpg) no-repeat scroll 0px 100% / cover transparent;
+  background: url(data_center.jpg) no-repeat center scroll;
   background-size: cover;
 }
 
@@ -44,7 +51,7 @@ p.com{
   height: 100%;
     text-align: center;
     padding-top: 200px;
-    padding-bottom: 300px;
+    padding-bottom: 200px;
 }
 
 .intro img{
@@ -63,11 +70,50 @@ p.com{
 
 .navbar-inverse{
   margin: 0px 0px 0px 0px;
+  border-radius: 0px;
 }
 
-.navbar-brand img{
-    width: auto;
-    height: auto;
+.section{
+  background-color: #222;
+  color: white;
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 100px;
+}
+
+.section h1{
+  display: inline;
+}
+
+.item{
+  margin-top: 45px;
+}
+
+.sticker{
+  font-size: 50px;
+  color: #D84315;
+}
+
+.productList .panel{
+  margin-top: 20px;
+  margin-bottom: 0px;
+}
+
+.myPanel{
+
+}
+
+.myPanel p{
+  margin: 0px;
+  display: inline;
+}
+
+.myPanel .click{
+  text-align: center;
+}
+
+.myPanel .glyphicon{
+  color: #D84315;
 }
 
 @media(max-width: @screen-sm-min) {
@@ -77,6 +123,16 @@ p.com{
     }
 
 }
+
+@media(max-width: ≥1200px) {
+    .intro {
+        height: auto;
+        padding-top: 100px;
+    }
+
+}
+
+
 
 .btn-primary:hover,
 .btn-primary:focus,
@@ -103,6 +159,7 @@ p.com{
 
 h1.section-heading {
     font-size: 36px;
+    color: white;
     text-transform: none;
     font-weight: 400;
     text-align: center;
@@ -115,7 +172,7 @@ h1.section-heading {
 }
 
 .panel:hover {
-    box-shadow: 5px 0px 40px rgba(0,0,0, .5);
+    box-shadow: 5px 0px 40px rgba(255,255,255, .5);
 }
 
 .panel-footer .btn:hover {
@@ -126,7 +183,7 @@ h1.section-heading {
 
 .panel-heading {
     color: #D84315 !important;
-    background-color: #222 !important;
+    background-color: white !important;
     padding: 25px;
     border-bottom: 1px solid transparent;
     border-top-left-radius: 0px;

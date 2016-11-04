@@ -5,7 +5,7 @@ import Index from '../imports/ui/Index.jsx';
 import Machines from '../imports/ui/Machines.jsx';
 import {dashboard} from '../imports/ui/Dashboard.jsx';
 import CustomerCenter from '../imports/ui/CustomerCenter.jsx';
-import ProductAnalysis from '../imports/ui/ProductAnalysis.jsx';
+import ProductLayout from '../imports/ui/ProductLayout.jsx';
 
 FlowRouter.route('/', {
   action() {
@@ -36,10 +36,20 @@ FlowRouter.route('/customercenter', {
   }
 });
 
-FlowRouter.route('/productanalysis', {
+FlowRouter.route('/products', {
   action() {
       mount(dashboard, {
-        content: (<ProductAnalysis/>)
+        content: (<ProductLayout/>)
+      }
+
+      )
+  }
+});
+
+FlowRouter.route('/products/:_id', {
+  action() {
+      mount(dashboard, {
+        content: (<ProductLayout/>)
       }
 
       )
