@@ -3,7 +3,7 @@ package objects;
 import java.math.BigInteger;
 
 /**
- * Created by mrpon on 05.10.2016.
+ * Created by Uno on 20.10.2016.
  */
 public class KafkaMessage {
     private String value;
