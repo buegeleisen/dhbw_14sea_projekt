@@ -5,6 +5,7 @@ import filereader.ERPFileReader;
 import kafka.Consumer;
 import kafka.message.Message;
 import mongoUI.MeteorMapper;
+import spark.SparkConsumer;
 import statemachine.MyMachine;
 
 import java.util.Vector;
@@ -28,6 +29,11 @@ public class Main {
         // Kafka Consumer
         Consumer consumer = new Consumer("192.168.99.100:1001", "prod");
         consumer.start();
+
+        SparkConsumer sparkConsumer= new SparkConsumer();
+        Thread sparkThread= new Thread(sparkConsumer);
+        sparkThread.start();
+
 
     }
 }
