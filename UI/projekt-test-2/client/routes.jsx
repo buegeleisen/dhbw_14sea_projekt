@@ -6,6 +6,8 @@ import Machines from '../imports/ui/Machines.jsx';
 import {dashboard} from '../imports/ui/Dashboard.jsx';
 import CustomerCenter from '../imports/ui/CustomerCenter.jsx';
 import ProductLayout from '../imports/ui/ProductLayout.jsx';
+import ProductDetail from '../imports/ui/ProductDetail.jsx';
+
 
 FlowRouter.route('/', {
   action() {
@@ -46,10 +48,11 @@ FlowRouter.route('/products', {
   }
 });
 
-FlowRouter.route('/products/:_id', {
-  action() {
+
+FlowRouter.route('/products/:id', {
+  action(params) {
       mount(dashboard, {
-        content: (<ProductLayout/>)
+        content: (<ProductDetail id = {params.id}/>)
       }
 
       )
