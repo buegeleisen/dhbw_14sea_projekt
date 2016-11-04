@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Button, Table} from 'react-bootstrap';
-import {CustomerCenterData} from '../api/customerData.js';
+
 
 const customerCenter = (
   <div className="col-md-12 container">
