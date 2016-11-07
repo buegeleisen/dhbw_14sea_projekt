@@ -12,6 +12,9 @@ import main.Main;
 import objects.KafkaMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import kafka.javaapi.producer.Producer;
+import kafka.producer.KeyedMessage;
+import kafka.producer.ProducerConfig;
 
 import org.apache.kafka.common.serialization.StringDeserializer;
 import spark.SparkConsumer;
@@ -58,6 +61,25 @@ public class Consumer extends AbstractExecutionThreadService {
         properties.put(PARTITION, "range");
     }
 
+    private void produceStream(String message){
+        //Properties für den Producer einrichten
+        Properties props = new Properties();
+
+        props.put("metadata.broker.list", "broker1:9090");//9090 ist der Port für der Consumer
+        props.put("serializer.class", "kafka.serializer.StringEncoder");
+        props.put("request.required.acks", "1");
+
+        ProducerConfig config = new ProducerConfig(props);
+
+
+        //Producer einrichten; Nachricht verschicken
+        Producer<String, String> producer = new Producer<String, String>(config);
+        String ip;
+        KeyedMessage<String, String> data = new KeyedMessage<String, String>("spark", "192.168.99.100", message);
+        producer.send(data);
+
+    }
+
     public void run() {
         logger.info("Starting the kafka.Consumer...");
 
@@ -72,6 +94,8 @@ public class Consumer extends AbstractExecutionThreadService {
                     for (MessageAndMetadata<byte[], byte[]> messageAndMetadata : messageStream) {
                         String message = new String(messageAndMetadata.message());
                         SparkConsumer.getKafkaString(message);
+                        //durch den Producer
+                        produceStream(message);
 
                         // to spark and Statemachine
 
