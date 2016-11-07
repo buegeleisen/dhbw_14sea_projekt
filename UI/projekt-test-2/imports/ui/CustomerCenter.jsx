@@ -1,48 +1,25 @@
 import React, { Component } from 'react';
 import {Button, Table} from 'react-bootstrap';
+import CustomerItem from'./CustomerItem.jsx';
 
-
-const customerCenter = (
-  <div className="col-md-12 container">
-    <div>
-      <h1 className="section-heading">Customer Center</h1>
-      </div>
-      <Table responsive>
-    <thead>
-      <tr>
-        <th>Customer Number</th>
-        <th>Customer Name</th>
-        <th>Order Number</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>Table cell</td>
-        <td>Table cell</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Table cell</td>
-        <td>Table cell</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Table cell</td>
-        <td>Table cell</td>
-      </tr>
-    </tbody>
-  </Table>
-
+const panel= (
+<div className="col-md-12 container">
+  <div>
+    <h1 className="section-heading">Customers and Orders Center</h1>
   </div>
-);
+  <div>
+    <CustomerItem orderid={1234} customerid={4567} productid={1337}/>
+    <CustomerItem orderid={5678}/>
+  </div>
 
+</div>
+);
 export default React.createClass({
 
 
   render() {
       return (
-          customerCenter
+          panel
             );
         }
   });
