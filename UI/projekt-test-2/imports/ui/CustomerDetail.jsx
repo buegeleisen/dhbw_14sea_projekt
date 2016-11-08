@@ -4,5 +4,19 @@ import {Panel} from 'react-bootstrap';
 import CustomerData from '../api/customerData.js';
 
 export default class CustomerDetail extends Component {
-  
-}
+  render(){
+    const orderDetail=(
+      <div>
+        Coming Soon...
+      </div>
+    )
+
+  return(
+    orderDetail
+  );
+};
+
+};
+CustomerDetail.propTypes={
+
+};

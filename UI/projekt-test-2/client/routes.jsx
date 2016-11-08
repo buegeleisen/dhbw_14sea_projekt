@@ -7,6 +7,7 @@ import {dashboard} from '../imports/ui/Dashboard.jsx';
 import CustomerCenter from '../imports/ui/CustomerCenter.jsx';
 import ProductLayout from '../imports/ui/ProductLayout.jsx';
 import ProductDetail from '../imports/ui/ProductDetail.jsx';
+import CustomerDetail from '../imports/ui/CustomerDetail.jsx';
 
 
 FlowRouter.route('/', {
@@ -38,6 +39,16 @@ FlowRouter.route('/customercenter', {
   }
 });
 
+FlowRouter.route('/customercenter/:id', {
+  action(params) {
+      mount(dashboard, {
+        content: (<CustomerDetail id = {params.id}/>)
+      }
+
+      )
+  }
+});
+
 FlowRouter.route('/products', {
   action() {
       mount(dashboard, {
@@ -50,6 +61,16 @@ FlowRouter.route('/products', {
 
 
 FlowRouter.route('/products/:id', {
+  action(params) {
+      mount(dashboard, {
+        content: (<ProductDetail id = {params.id}/>)
+      }
+
+      )
+  }
+});
+
+FlowRouter.route('/customercenter/:id', {
   action(params) {
       mount(dashboard, {
         content: (<ProductDetail id = {params.id}/>)
