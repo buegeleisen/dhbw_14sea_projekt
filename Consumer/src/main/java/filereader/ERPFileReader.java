@@ -5,10 +5,14 @@
 package filereader;
 
 import com.google.gson.Gson;
+import kafka.javaapi.producer.Producer;
+import kafka.producer.KeyedMessage;
+import kafka.producer.ProducerConfig;
 import objects.ERPFile;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.util.Properties;
 import java.util.Vector;
 import java.nio.file.StandardWatchEventKinds;
 import java.nio.file.Path;
@@ -31,6 +35,26 @@ public class ERPFileReader implements Runnable {
         this.observedPath = observedPath;
         this.processedPath = processedPath;
     }
+
+    private void produceStream(String message){
+        //Properties für den Producer einrichten
+        Properties props = new Properties();
+
+        props.put("metadata.broker.list", "broker1:9090");//9090 ist der Port für der Consumer
+        props.put("serializer.class", "kafka.serializer.StringEncoder");
+        props.put("request.required.acks", "1");
+
+        ProducerConfig config = new ProducerConfig(props);
+
+
+        //Producer einrichten; Nachricht verschicken
+        Producer<String, String> producer = new Producer<String, String>(config);
+        String ip;
+        KeyedMessage<String, String> data = new KeyedMessage<String, String>("spark", "192.168.99.100", message);
+        producer.send(data);
+
+    }
+
 
     private void read() throws Exception {
         File f = new File(observedPath);
