@@ -22,17 +22,17 @@ class Machines extends Component{
         </div>
         <div className="col-md-6">
           <Panel header="Milling Speed">
-            <LineChart labelName="Milling Speed" lineChartData={this.props.millingtemperaturedata}/>
+            <LineChart labelName="Milling Speed" lineChartData={this.props.millingspeeddata}/>
           </Panel>
         </div>
         <div className="col-md-6">
           <Panel header="Drilling Temperature">
-            <LineChart labelName="Drilling Temperature" lineChartData={this.props.millingtemperaturedata} />
+            <LineChart labelName="Drilling Temperature" lineChartData={this.props.drillingtemperaturedata} />
           </Panel>
         </div>
         <div className="col-md-6">
           <Panel header="Drilling Speed">
-            <LineChart labelName="Drilling Speed" lineChartData={this.props.millingtemperaturedata}/>
+            <LineChart labelName="Drilling Speed" lineChartData={this.props.drillingspeeddata}/>
           </Panel>
         </div>
       </div>
