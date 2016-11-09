@@ -1,8 +1,13 @@
 package activemq;
 import javax.jms.*;
 
+import kafka.javaapi.producer.Producer;
+import kafka.producer.KeyedMessage;
+import kafka.producer.ProducerConfig;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import spark.SparkConsumer;
+
+import java.util.Properties;
 
 public class ActivemqConsumer implements Runnable {
     Session session = null;
@@ -12,6 +17,26 @@ public class ActivemqConsumer implements Runnable {
     public ActivemqConsumer(String dest) {
         this.dest = dest;
     }
+
+    private void produceStream(String message){
+        //Properties für den Producer einrichten
+        Properties props = new Properties();
+
+        props.put("metadata.broker.list", "broker1:9090");//9090 ist der Port für der Consumer
+        props.put("serializer.class", "kafka.serializer.StringEncoder");
+        props.put("request.required.acks", "1");
+
+        ProducerConfig config = new ProducerConfig(props);
+
+
+        //Producer einrichten; Nachricht verschicken
+        Producer<String, String> producer = new Producer<String, String>(config);
+        String ip;
+        KeyedMessage<String, String> data = new KeyedMessage<String, String>("spark", "192.168.99.100", message);
+        producer.send(data);
+
+    }
+
 
     public void run() {
         try {
@@ -41,9 +66,13 @@ public class ActivemqConsumer implements Runnable {
                             e.printStackTrace();
                         }
                         SparkConsumer.getActivemqString(text);
+                        //durch den Producer
+                        produceStream(text);
                         System.out.println("Received: " + text);
                     } else {
                         SparkConsumer.getActivemqString(message.toString());
+                        //durch den Producer
+                        produceStream(message.toString());
                         System.out.println("Received: " + message);
                     }
                 }
