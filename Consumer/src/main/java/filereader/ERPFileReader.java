@@ -9,6 +9,7 @@ import kafka.javaapi.producer.Producer;
 import kafka.producer.KeyedMessage;
 import kafka.producer.ProducerConfig;
 import objects.ERPFile;
+import spark.SparkProducer;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -36,26 +37,6 @@ public class ERPFileReader implements Runnable {
         this.processedPath = processedPath;
     }
 
-    private void produceStream(String message){
-        //Properties für den Producer einrichten
-        Properties props = new Properties();
-
-        props.put("metadata.broker.list", "broker1:9090");//9090 ist der Port für der Consumer
-        props.put("serializer.class", "kafka.serializer.StringEncoder");
-        props.put("request.required.acks", "1");
-
-        ProducerConfig config = new ProducerConfig(props);
-
-
-        //Producer einrichten; Nachricht verschicken
-        Producer<String, String> producer = new Producer<String, String>(config);
-        String ip;
-        KeyedMessage<String, String> data = new KeyedMessage<String, String>("spark", "192.168.99.100", message);
-        producer.send(data);
-
-    }
-
-
     private void read() throws Exception {
         File f = new File(observedPath);
         File[] fileArray = f.listFiles();
@@ -63,7 +44,7 @@ public class ERPFileReader implements Runnable {
         Path moveSourcePath = null;
         Path moveTargetPath = null;
 
-        for (int i = 0; i < fileArray.length; i++) {
+        for (int i = 0; i < fileArray.length; i++) {//TODO: Gibt nur die ERPs am Anfang aus, danach nichts. Was wenn fileArray leer? Dann läuft die Schleife nie und wird nie betreten
             erppath = observedPath + fileArray[i].getName();
             BufferedReader input = new BufferedReader(new java.io.FileReader(erppath));
             String zeile = null;
@@ -73,6 +54,7 @@ public class ERPFileReader implements Runnable {
                 ERPFile test  = gson.fromJson(jsonInString, ERPFile.class);
                 erpfiles.add(test);
                 zeile = input.readLine();
+                SparkProducer.setERPFile(test);
                 System.out.println(erpfiles.elementAt(i).getA1());
             }
             input.close();
