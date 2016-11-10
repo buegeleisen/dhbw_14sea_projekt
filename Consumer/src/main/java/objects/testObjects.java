@@ -9,7 +9,7 @@ import java.util.Vector;
 /**
  * Created by migue on 04.11.2016.
  */
-public class testObjects {
+public class testObjects {/*
     Gson gson = new Gson();
     Object object = new Object();
     String string = gson.toJson(object);
@@ -95,5 +95,5 @@ public class testObjects {
         ERPFile erpFile=new ERPFile(1997.1362344671954,894.5953675180889,98.51223018253364,75.97513667666413,19974.137007777015,148544.44277387593,"OK",big2,big3);
         Product test=new Product(erpFile,messages,activemqMessage);
         return test;
-    }
+    }*/
 }

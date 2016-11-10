@@ -5,7 +5,7 @@ import filereader.ERPFileReader;
 import kafka.Consumer;
 import kafka.message.Message;
 import mongoUI.MeteorMapper;
-import spark.SparkConsumer;
+import spark.SparkProducer;
 import statemachine.MyMachine;
 
 import java.util.Vector;
@@ -18,19 +18,19 @@ public class Main {
 
     public static void main (String[] args){
         //ActiveMQ Consumer
-        Thread activemq = new Thread(new ActivemqConsumer("tcp://localhost:32780"));
+        Thread activemq = new Thread(new ActivemqConsumer("tcp://192.168.99.100:32768"));//TODO: put your own Activemq-ip
         activemq.start();
 
         //FileReader
-        ERPFileReader fileReader = new ERPFileReader(args[0],args[1]);
+        ERPFileReader fileReader = new ERPFileReader("C:/Users/artur.f/Downloads/kafka_2.11-0.10.0.0/kafka_2.11-0.10.0.0/Files/","C:/Users/artur.f/Downloads/kafka_2.11-0.10.0.0/kafka_2.11-0.10.0.0/Files/");//TODO: put your own paths
         Thread fileThread = new Thread(fileReader);
         fileThread.start();
 
         // Kafka Consumer
-        Consumer consumer = new Consumer("192.168.99.100:1001", "prod");
+        Consumer consumer = new Consumer("192.168.99.100:1001", "prod");//TODO: put your own Kafka-ip
         consumer.start();
 
-        SparkConsumer sparkConsumer= new SparkConsumer();
+        SparkProducer sparkConsumer= new SparkProducer();
         Thread sparkThread= new Thread(sparkConsumer);
         sparkThread.start();
 

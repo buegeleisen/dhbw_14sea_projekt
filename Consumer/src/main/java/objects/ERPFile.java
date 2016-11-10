@@ -98,4 +98,19 @@ public class ERPFile {
     public void setTs_stop(BigInteger ts_stop) {
         this.ts_stop = ts_stop;
     }
+
+    public String toString(){
+        String string=
+                "Em1: "+this.getEm1()+
+                        "\nEm2: "+this.getEm2()+
+                        "\nA1: "+this.getA1()+
+                        "\nA2: "+this.getA2()+
+                        "\nB2: "+this.getB2()+
+                        "\nB1: "+this.getB1()+
+                        "\nOverallStatus: "+this.getOverallStatus()+
+                        "\nTS_Start: "+this.getTs_start()+
+                        "\nTS_Stop: "+this.getTs_stop()+
+                        "\n";
+        return string;
+    }
 }

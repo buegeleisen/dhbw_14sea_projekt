@@ -49,4 +49,14 @@ public class KafkaMessage {
     public void setTimestamp(BigInteger timestamp) {
         this.timestamp = timestamp;
     }
+
+    public String toString(){
+        String string =
+                "Value: "+this.getValue()+
+                        "\nStatus: "+this.getStatus()+
+                        "\nItemName: "+this.getItemName()+
+                        "\nItemStamp: "+this.getTimestamp()+
+                        "\n";
+        return string;
+    }
 }
