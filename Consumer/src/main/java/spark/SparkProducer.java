@@ -69,6 +69,8 @@ public class SparkProducer implements Runnable{
 
                 Gson gson = new Gson();
                 String jsonInString = gson.toJson(product);
+                System.out.println("JSON für Producer: "+jsonInString);
+                produceStream(jsonInString);
 
                 erp=null;
                 kafkaMessages= new Vector<KafkaMessage>();
