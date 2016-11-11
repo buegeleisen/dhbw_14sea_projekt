@@ -11,7 +11,7 @@ class ProductLayout extends Component {
 
   renderTable(){
     return this.props.productData.map((item) => (
-      <ProductItem key={item.activemq.materialnumber} id={item._id} customer={item.activemq.customernumber} timestamp={item.activemq.timestamp} />
+      <ProductItem key={item.activemq.materialnumber} id={item.id} customer={item.activemq.customernumber} timestamp={item.activemq.timestamp} />
     ));
   };
 
@@ -34,7 +34,7 @@ class ProductLayout extends Component {
 
 render() {
   let count = 5;
-  let sort = -1;
+  let sort = 1;
 
   const render =(
     <div>

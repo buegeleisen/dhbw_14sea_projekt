@@ -10,7 +10,7 @@ export default class ProductItem extends Component{
             <div className="myPanel">
               <div className="col-md-3">
                 <p>ID: </p>
-                <p>{this.props._id}</p>
+                <p>{this.props.id}</p>
               </div>
               <div className="col-md-4">
                 <p>Timestamp: </p>
@@ -21,7 +21,7 @@ export default class ProductItem extends Component{
                 <p>{this.props.customer}</p>
               </div>
               <div className="col-md-2 click">
-                <a href={"/products/" + this.props._id}>
+                <a href={"/products/" + this.props.id}>
                   <Glyphicon glyph="chevron-right" />
                 </a>
               </div>
@@ -33,6 +33,7 @@ export default class ProductItem extends Component{
   };
 
 ProductItem.propTypes= {
+  id: PropTypes.number,
   timestamp: PropTypes.string,
   customer: PropTypes.number
 };
