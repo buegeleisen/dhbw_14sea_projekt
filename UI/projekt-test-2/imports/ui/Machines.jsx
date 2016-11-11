@@ -17,22 +17,22 @@ class Machines extends Component{
         </div>
         <div className="col-md-6">
           <Panel header="Milling Temperature">
-            <div><LineChart labelName="Milling Temperature" lineChartData={this.props.millingtemperaturedata} /></div>
+            <div><LineChart labelName="Milling Temperature" yAxis={this.props.millingtemperaturedata} /></div>
           </Panel>
         </div>
         <div className="col-md-6">
           <Panel header="Milling Speed">
-            <LineChart labelName="Milling Speed" lineChartData={this.props.millingspeeddata}/>
+            <LineChart labelName="Milling Speed" yAxis={this.props.millingspeeddata}/>
           </Panel>
         </div>
         <div className="col-md-6">
           <Panel header="Drilling Temperature">
-            <LineChart labelName="Drilling Temperature" lineChartData={this.props.drillingtemperaturedata} />
+            <LineChart labelName="Drilling Temperature" yAxis={this.props.drillingtemperaturedata} />
           </Panel>
         </div>
         <div className="col-md-6">
           <Panel header="Drilling Speed">
-            <LineChart labelName="Drilling Speed" lineChartData={this.props.drillingspeeddata}/>
+            <LineChart labelName="Drilling Speed" yAxis={this.props.drillingspeeddata}/>
           </Panel>
         </div>
       </div>
