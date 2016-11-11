@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
-import RadarChart from './RadarChart.jsx'
+import BarChart from './BarChart.jsx'
 import ProductData from '../api/productData.js';
 import {Panel} from 'react-bootstrap';
 
@@ -18,7 +18,7 @@ export default class ProductDetail extends Component {
       <div className="col-md-12">
         <div className="col-md-8">
           <Panel>
-            <RadarChart />
+            <BarChart />
           </Panel>
         </div>
         <div className="col-md-4">
@@ -33,12 +33,12 @@ export default class ProductDetail extends Component {
       </div>
       <div className="col-md-12">
           <Panel header="Comparison to Average of All Products">
-            <RadarChart />
+            <BarChart />
         </Panel>
         </div>
         <div className="col-md-12">
           <Panel header="Comparison to Average of All Customer Products">
-            <RadarChart />
+            <BarChart />
           </Panel>
         </div>
     </div>
@@ -51,12 +51,12 @@ export default class ProductDetail extends Component {
   };
 
 ProductDetail.propTypes= {
-    id: PropTypes.string,
     product: PropTypes.object,
+    id: PropTypes.object,
 };
 
-/*export default createContainer(() => {
+export default createContainer(() => {
   return {
     product: ProductData.findOne({id: this.props.id}),
   };
-}, ProductDetail);*/
+}, ProductDetail);
