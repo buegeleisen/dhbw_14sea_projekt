@@ -95,4 +95,7 @@ public class ERPFileReader implements Runnable {
             e.printStackTrace();
         }
     }
+    public static Vector<ERPFile> getERPFiles(){
+        return erpfiles;
+    }
 }
