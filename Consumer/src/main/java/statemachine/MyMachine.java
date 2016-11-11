@@ -4,8 +4,15 @@ import com.github.oxo42.stateless4j.StateMachine;
 import com.github.oxo42.stateless4j.StateMachineConfig;
 import com.github.oxo42.stateless4j.delegates.Action;
 import com.google.gson.Gson;
+import filereader.ERPFileReader;
 import main.Main;
+import objects.Activemqmessage;
+import objects.ERPFile;
 import objects.KafkaMessage;
+import objects.Product;
+import spark.SparkProducer;
+
+import java.util.Vector;
 
 /**
  * Created by mrpon on 05.10.2016.
@@ -44,6 +51,11 @@ public class MyMachine {
     private StateMachineConfig<String, String> config = new StateMachineConfig<String, String>();
     private StateMachine<String, String> stateMachine = null;
 
+    private static int zaehler=0;
+    private static Vector<KafkaMessage> kafkaMessages= new Vector<KafkaMessage>();
+    private static Activemqmessage activemqmessage= null;
+
+
     public MyMachine(){
         config.configure(preL1).permit(L1_true, preL2);
         config.configure(preL2).permit(L2_true, preMilling);
@@ -59,8 +71,13 @@ public class MyMachine {
         stateMachine = new StateMachine<String, String>(preL1, config);
     }
 
-
-
+    public static void setKafkaMessage(KafkaMessage kafkaMessage){
+        zaehler++;
+        kafkaMessages.add(kafkaMessage);
+    }
+    public static void setActivemqmessage(Activemqmessage activemqmessage){
+        MyMachine.activemqmessage = activemqmessage;
+    }
     private void sendToStatemachine(String s){
         KafkaMessage message = gson.fromJson(s, KafkaMessage.class);
         if(message.getValue().equals("true") || message.getValue().equals("false")){
@@ -75,5 +92,10 @@ public class MyMachine {
 
     public StateMachine<String, String> getStateMachine() {
         return stateMachine;
+    }
+
+    private void createProduct(){
+        ERPFile erp= ERPFileReader.getERPFiles().lastElement();
+        Product product=new Product(erp,kafkaMessages,activemqmessage);
     }
 }
