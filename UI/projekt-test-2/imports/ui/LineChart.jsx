@@ -5,9 +5,10 @@ import {Line} from 'react-chartjs-2';
 export default class LineChart extends Component{
     render() {
          const data = {
+            labels: this.props.xAxis,
             datasets: [{
             label: this.props.labelName,
-            data: this.props.lineChartData,
+            data: this.props.yAxis,
             fill: false,
             lineTension: 0.1,
             backgroundColor: "rgba(75,192,192,0.4)",
@@ -54,6 +55,7 @@ export default class LineChart extends Component{
 };
 
 LineChart.propTypes = {
-  lineChartData: PropTypes.array,
+  yAxis: PropTypes.array,
+  xAxis: PropTypes.array,
   labelName: PropTypes.string
 };
