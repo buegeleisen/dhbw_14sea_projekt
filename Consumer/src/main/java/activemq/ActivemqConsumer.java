@@ -1,12 +1,17 @@
 package activemq;
 import javax.jms.*;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 
 import kafka.javaapi.producer.Producer;
 import kafka.producer.KeyedMessage;
 import kafka.producer.ProducerConfig;
+import objects.Activemqmessage;
 import org.apache.activemq.ActiveMQConnectionFactory;
-import spark.SparkConsumer;
+import spark.SparkProducer;
 
+import java.io.StringReader;
 import java.util.Properties;
 
 public class ActivemqConsumer implements Runnable {
@@ -18,25 +23,19 @@ public class ActivemqConsumer implements Runnable {
         this.dest = dest;
     }
 
-    private void produceStream(String message){
-        //Properties für den Producer einrichten
-        Properties props = new Properties();
-
-        props.put("metadata.broker.list", "broker1:9090");//9090 ist der Port für der Consumer
-        props.put("serializer.class", "kafka.serializer.StringEncoder");
-        props.put("request.required.acks", "1");
-
-        ProducerConfig config = new ProducerConfig(props);
-
-
-        //Producer einrichten; Nachricht verschicken
-        Producer<String, String> producer = new Producer<String, String>(config);
-        String ip;
-        KeyedMessage<String, String> data = new KeyedMessage<String, String>("spark", "192.168.99.100", message);
-        producer.send(data);
-
+    private Activemqmessage xmlToActivemq(String xml){
+        JAXBContext jaxbContext = null;
+        try {
+            jaxbContext = JAXBContext.newInstance(Activemqmessage.class);
+            Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+            StringReader reader = new StringReader(xml);
+            Activemqmessage activemqmessage = (Activemqmessage) unmarshaller.unmarshal(reader);
+            return activemqmessage;
+        } catch (JAXBException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
-
 
     public void run() {
         try {
@@ -65,14 +64,10 @@ public class ActivemqConsumer implements Runnable {
                         } catch (JMSException e) {
                             e.printStackTrace();
                         }
-                        SparkConsumer.getActivemqString(text);
-                        //durch den Producer
-                        produceStream(text);
+                        SparkProducer.setActivemqmessage(xmlToActivemq(text));
                         System.out.println("Received: " + text);
                     } else {
-                        SparkConsumer.getActivemqString(message.toString());
-                        //durch den Producer
-                        produceStream(message.toString());
+                        SparkProducer.setActivemqmessage(xmlToActivemq(message.toString()));
                         System.out.println("Received: " + message);
                     }
                 }

@@ -65,7 +65,7 @@ public class MyMachine {
         KafkaMessage message = gson.fromJson(s, KafkaMessage.class);
         if(message.getValue().equals("true") || message.getValue().equals("false")){
             String trigger = message.getItemName() + "_" +message.getValue();
-            Main.myMachine.getStateMachine().fire(trigger);
+          //  Main.myMachine.getStateMachine().fire(trigger);
         }
     }
 
