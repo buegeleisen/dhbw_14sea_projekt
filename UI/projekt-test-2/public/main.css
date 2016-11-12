@@ -94,9 +94,14 @@ body{
   color: #D84315;
 }
 
+
 .productList .panel{
   margin-top: 20px;
   margin-bottom: 0px;
+}
+
+.control-label{
+  color: white;
 }
 
 .myPanel{
@@ -115,6 +120,8 @@ body{
 .myPanel .glyphicon{
   color: #D84315;
 }
+
+.machineConatiner{}
 
 @media(max-width: @screen-sm-min) {
     .intro {
