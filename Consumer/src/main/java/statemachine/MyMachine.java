@@ -54,6 +54,7 @@ public class MyMachine {
     private static int zaehler=0;
     private static Vector<KafkaMessage> kafkaMessages= new Vector<KafkaMessage>();
     private static Activemqmessage activemqmessage= null;
+    private static ERPFile erp;
 
 
     public MyMachine(){
@@ -72,11 +73,16 @@ public class MyMachine {
     }
 
     public static void setKafkaMessage(KafkaMessage kafkaMessage){
-        zaehler++;
         kafkaMessages.add(kafkaMessage);
     }
     public static void setActivemqmessage(Activemqmessage activemqmessage){
         MyMachine.activemqmessage = activemqmessage;
+    }
+    public static void setERPFile(ERPFile e){
+        MyMachine.erp=e;
+    }
+    public static ERPFile getERPFile(){
+        return erp;
     }
     private void sendToStatemachine(String s){
         KafkaMessage message = gson.fromJson(s, KafkaMessage.class);
@@ -86,6 +92,7 @@ public class MyMachine {
         }
     }
 
+
     public StateMachineConfig<String, String> getConfig() {
         return config;
     }
@@ -94,8 +101,7 @@ public class MyMachine {
         return stateMachine;
     }
 
-    private void createProduct(){
-        ERPFile erp= ERPFileReader.getERPFiles().lastElement();
-        Product product=new Product(erp,kafkaMessages,activemqmessage);
+    public void createProduct(ERPFile e, Vector<KafkaMessage> kafkaMessages, Activemqmessage a){
+        Product product=new Product(e,kafkaMessages,activemqmessage);
     }
 }
