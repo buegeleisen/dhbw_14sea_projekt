@@ -121,6 +121,8 @@ body{
   color: #D84315;
 }
 
+.machineConatiner{}
+
 @media(max-width: @screen-sm-min) {
     .intro {
         height: auto;
