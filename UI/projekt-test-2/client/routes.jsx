@@ -63,17 +63,7 @@ FlowRouter.route('/products', {
 FlowRouter.route('/products/:id', {
   action(params) {
       mount(dashboard, {
-        content: (<ProductDetail id = {params.id}/>)
-      }
-
-      )
-  }
-});
-
-FlowRouter.route('/customercenter/:id', {
-  action(params) {
-      mount(dashboard, {
-        content: (<ProductDetail id = {params.id}/>)
+        content: (<ProductDetail id = {parseInt(params.id)}/>)
       }
 
       )

@@ -8,20 +8,12 @@ export default class CustomerItem extends Component{
         <div className="productList">
           <Panel>
             <div className="myPanel">
-              <div className="col-md-3">
-                <p>OrderID: </p>
-                <p>{this.props.orderid}</p>
-              </div>
-              <div className="col-md-4">
+              <div className="col-md-10">
                 <p>CustomerID: </p>
                 <p>{this.props.customerid}</p>
               </div>
-              <div className="col-md-3">
-                <p>ProductID: </p>
-                <p>{this.props.productid}</p>
-              </div>
               <div className="col-md-2 click">
-                <a href={"/customercenter/" + this.props.orderid}>
+                <a href={"/customercenter/" + this.props.customerid}>
                   <Glyphicon glyph="chevron-right" />
                 </a>
               </div>
@@ -33,7 +25,5 @@ export default class CustomerItem extends Component{
   };
 
 CustomerItem.propTypes= {
-  orderid: PropTypes.number,
-  customerid: PropTypes.string,
-  productid: PropTypes.number
+  customerid: PropTypes.number,
 };
