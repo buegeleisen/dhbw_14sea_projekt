@@ -68,7 +68,6 @@ public class ActivemqConsumer implements Runnable {
                         }
                         SparkProducer.setActivemqmessage(xmlToActivemq(text));
                         Worker.setActivemqmessage(xmlToActivemq(text));
-                        Worker.run();
                         System.out.println("Received: " + text);
                     } else {
                         SparkProducer.setActivemqmessage(xmlToActivemq(message.toString()));

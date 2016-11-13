@@ -49,7 +49,7 @@ public class MyMachine {
 
     private Gson gson = new Gson();
     private StateMachineConfig<String, String> config = new StateMachineConfig<String, String>();
-    private StateMachine<String, String> stateMachine = null;
+    private static StateMachine<String, String> stateMachine = null;
 
     private static int zaehler=0;
     private static Vector<KafkaMessage> kafkaMessages= new Vector<KafkaMessage>();
@@ -74,12 +74,19 @@ public class MyMachine {
 
     public static void setKafkaMessage(KafkaMessage kafkaMessage){
         kafkaMessages.add(kafkaMessage);
+        stateMachine.fire(kafkaMessage.getItemName()+"_"+kafkaMessage.getValue());
     }
     public static void setActivemqmessage(Activemqmessage activemqmessage){
         MyMachine.activemqmessage = activemqmessage;
     }
-    public static void setERPFile(ERPFile e){
-        MyMachine.erp=e;
+    public  void setERPFile(ERPFile e){
+        if(stateMachine.getState()=="finish"){
+            erp=e;
+            Product product=new Product(e,kafkaMessages,activemqmessage);
+            Gson gson=new Gson();
+            String jsonInString=gson.toJson(product);
+            System.out.println(jsonInString);// TODO Product übergeben
+        }
     }
     public static ERPFile getERPFile(){
         return erp;

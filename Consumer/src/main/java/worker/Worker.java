@@ -13,28 +13,36 @@ import java.util.Vector;
  * Created by migue on 12.11.2016.
  */
 public class Worker {
-    ERPFile erp= ERPFileReader.getERPFiles().lastElement();//TODO muss noch ERP Queue
-    private static Activemqmessage activemqmessage;
-    private static KafkaMessage kafka;
-    private static StatemachineQueue queue;
-    private static Vector<KafkaMessage> kafkaMessages=new Vector<KafkaMessage>();
+    static ERPFile erp= ERPFileReader.getERPFiles().lastElement();//TODO muss noch ERP Queue
+    private Activemqmessage activemqmessage;
+    private static StatemachineQueue<MyMachine> queue = new StatemachineQueue();
 
     public Worker(){
-        queue= new StatemachineQueue();
+
     }
-    public static void run(){
+    public  void run(){
         MyMachine state=new MyMachine();
         state.setActivemqmessage(activemqmessage);
         queue.add(state);
-
+        int blazeIt=420;
     }
 
-    public static void setActivemqmessage(Activemqmessage activemqmessage){
-        Worker.activemqmessage = activemqmessage;
+    public  void setActivemqmessage(Activemqmessage activemqmessage){
+        this.activemqmessage = activemqmessage;
+        run();
     }
+
     public static void setKafkaMessage(KafkaMessage kafkaMessage){
-        Worker.kafka=kafkaMessage;
-        
+        for(int i=0; i<queue.size(); i++){
+            queue.get(i).setKafkaMessage(kafkaMessage);
+        }
+    }
+
+    public static void setErpFile(ERPFile e){
+        erp=e;
+        for(int i=0; i<queue.size(); i++){
+            queue.get(i).setERPFile(e);
+        }
     }
 
 
