@@ -19,6 +19,7 @@ import kafka.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import spark.SparkProducer;
 import statemachine.MyMachine;
+import worker.Worker;
 
 import java.util.List;
 import java.util.Map;
@@ -79,6 +80,7 @@ public class Consumer extends AbstractExecutionThreadService {
                         KafkaMessage kafkaMessage = gson.fromJson(message, KafkaMessage.class);
                         SparkProducer.setKafkaMessage(kafkaMessage);System.out.println("1");
                         MyMachine.setKafkaMessage(kafkaMessage);
+                        Worker.setKafkaMessage(kafkaMessage);
                         // to spark and Statemachine
 
                         logger.info("Received: {}", message);
