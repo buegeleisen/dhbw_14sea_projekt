@@ -15,6 +15,10 @@ class CustomerCenter extends Component{
     ));
   };
 
+  getMongoDBSet(){
+    return Array.from(new Set(this.mapMongoDB()));
+  }
+
   test(){
     for(let i =0; i< this.mapMongoDB().length; i++){
       console.log(this.mapMongoDB()[i]);
@@ -22,7 +26,7 @@ class CustomerCenter extends Component{
   }
 
   renderTable(){
-    return this.mapMongoDB().map((value) =>(
+    return this.getMongoDBSet().map((value) =>(
       <CustomerItem key={value} customerid={value} />
     ));
   };
@@ -69,7 +73,7 @@ class CustomerCenter extends Component{
           </FormGroup>
         </div>
         <div className="col-md-2">
-          <FormGroup controlId="formControlsSelect" disabled>
+          <FormGroup controlId="formControlsSelect">
             <ControlLabel>Sorty By</ControlLabel>
             <FormControl componentClass="select" placeholder="select" onChange={this.sortHandler}>
               <option value="latest">latest</option>
