@@ -12,7 +12,7 @@ class Machines extends Component{
   renderLast(array){
     return array.map((item) => (
      item.y
-  ));
+   ));
   }
 
   test(log){
@@ -83,7 +83,9 @@ class Machines extends Component{
             <LineChart
               labelName="Drilling Temperature"
               yAxis={this.props.drillingtemperaturedata}
-
+              backgroundColor= "#548235"
+              borderColor= "#548235"
+              pointHoverBackgroundColor= "#548235"
               />
           </Panel>
         </div>
@@ -95,7 +97,9 @@ class Machines extends Component{
             <LineChart
               labelName="Drilling Speed"
               yAxis={this.props.drillingspeeddata}
-
+              backgroundColor= "#548235"
+              borderColor= "#548235"
+              pointHoverBackgroundColor= "#548235"
               />
           </Panel>
         </div>
