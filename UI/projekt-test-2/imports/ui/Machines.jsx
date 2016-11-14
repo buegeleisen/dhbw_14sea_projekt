@@ -27,17 +27,15 @@ class Machines extends Component{
         <div>
           <h1 className="section-heading">Machine Overview</h1>
           <Panel>
-            <div className="col-md-1"></div>
-            <div className="col-md-1">Status 1</div>
-            <div className="col-md-1">Status 1</div>
-            <div className="col-md-1">Status 1</div>
-            <div className="col-md-1">Status 1</div>
-            <div className="col-md-1">Status 1</div>
-            <div className="col-md-1">Status 1</div>
-            <div className="col-md-1">Status 1</div>
-            <div className="col-md-1">Status 1</div>
-            <div className="col-md-1">Status 1</div>
-            <div className="col-md-1">Status 1</div>
+            <div className="col-md-2"></div>
+            <div className="col-md-1">Sensor 1</div>
+            <div className="col-md-1">Sensor 2</div>
+            <div className="col-md-1">Milling</div>
+            <div className="col-md-1">Sensor 3</div>
+            <div className="col-md-1">Drilling</div>
+            <div className="col-md-1">Sensor 4</div>
+            <div className="col-md-1">Sensor 5</div>
+
           </Panel>
         </div>
 

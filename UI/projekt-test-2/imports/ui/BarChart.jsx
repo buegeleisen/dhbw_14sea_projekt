@@ -17,11 +17,24 @@ export default class BarChart extends Component{
     ]
 };
 
+const options = {
+        scales: {
+            xAxes: [{
+                stacked: true
+            }],
+            yAxes: [{
+                stacked: true,
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+};
 
 
         return (
             <div className="col-md-12 container">
-                <Bar ref='data' data = {data}/>
+                <Bar ref='data' data = {data} options={options}/>
             </div>
             );
         }
