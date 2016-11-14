@@ -4,6 +4,7 @@ import {Panel} from 'react-bootstrap';
 import ProductLayout from './ProductLayout.jsx';
 import ProductData from '../api/productData.js';
 import ProductItem from './ProductItem.jsx';
+import * as Analysis from '../api/analysis.js';
 
 export default class CustomerDetail extends Component {
 
@@ -15,6 +16,7 @@ export default class CustomerDetail extends Component {
 
 
   render(){
+
     const orderDetail=(
       <div className="col-md-12 container">
         <div>
@@ -26,6 +28,7 @@ export default class CustomerDetail extends Component {
           <Panel>
             <p>CustomerID: {this.props.customerid}</p>
             <p>Orders Count: {this.props.customer.length}</p>
+            <p>Average Orders per Customer: {Analysis.getAverageCountProducts()}</p>
           </Panel>
           </div>
         </div>
