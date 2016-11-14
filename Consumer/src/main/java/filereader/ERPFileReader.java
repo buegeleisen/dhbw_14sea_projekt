@@ -10,6 +10,7 @@ import kafka.producer.KeyedMessage;
 import kafka.producer.ProducerConfig;
 import objects.ERPFile;
 import spark.SparkProducer;
+import worker.Worker;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -55,6 +56,7 @@ public class ERPFileReader implements Runnable {
                 erpfiles.add(test);
                 zeile = input.readLine();
                 SparkProducer.setERPFile(test);
+                Worker.setErpFile(test);
                 System.out.println(erpfiles.elementAt(i).getA1());
             }
             input.close();
