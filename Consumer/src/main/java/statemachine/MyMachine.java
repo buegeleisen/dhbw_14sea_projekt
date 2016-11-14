@@ -29,10 +29,14 @@ public class MyMachine {
     public static String L4_true = "L4_true";
     public static String L5_false = "L5_false";
     public static String L5_true = "L5_true";
-    public static String Milling_false = "Milling_false";
-    public static String Milling_true = "Milling_true";
-    public static String Drilling_false = "Drilling_false";
-    public static String Drilling_true = "Drilling_true";
+    public static String MILLING_false = "MILLING_false";
+    public static String MILLING_true = "MILLING_true";
+    public static String DRILLING_false = "DRILLING_false";
+    public static String DRILLING_true = "DRILLING_true";
+    public static String DRILLING_HEAT="DRILLING_HEAT";
+    public static String DRILLING_SPEED="DRILLING_SPEED";
+    public static String MILLING_HEAT="MILLING_HEAT";
+    public static String MILLING_SPEED="MILLING_SPEED";
 
     //States
     public static String preL1 = "preL1";
@@ -49,35 +53,55 @@ public class MyMachine {
 
     private Gson gson = new Gson();
     private StateMachineConfig<String, String> config = new StateMachineConfig<String, String>();
-    private static StateMachine<String, String> stateMachine = null;
+    private StateMachine<String, String> stateMachine = null;
 
-    private static int zaehler=0;
-    private static Vector<KafkaMessage> kafkaMessages= new Vector<KafkaMessage>();
-    private static Activemqmessage activemqmessage= null;
-    private static ERPFile erp;
+
+    private Vector<KafkaMessage> kafkaMessages= new Vector<KafkaMessage>();
+    private  Activemqmessage activemqmessage= null;
+    private  ERPFile erp;
 
 
     public MyMachine(){
+        config.configure(preL1).ignore(L1_false);
         config.configure(preL1).permit(L1_true, preL2);
+        config.configure(preL2).ignore(L2_false);
         config.configure(preL2).permit(L2_true, preMilling);
         config.configure(preMilling).permit(L3_false, Milling);
-        config.configure(Milling).permit(Milling_false, preL3);
+        config.configure(Milling).ignore(MILLING_true);
+        config.configure(Milling).ignore(MILLING_SPEED);
+        config.configure(Milling).ignore(MILLING_HEAT);
+        config.configure(Milling).permit(MILLING_false, preL3);
         config.configure(preL3).permit(L3_true, preDrilling);
         config.configure(preDrilling).permit(L4_false, Drilling);
-        config.configure(Drilling).permit(Drilling_false, preL4);
+        config.configure(Drilling).ignore(DRILLING_true);
+        config.configure(Drilling).ignore(DRILLING_SPEED);
+        config.configure(Drilling).ignore(DRILLING_HEAT);
+        config.configure(Drilling).permit(DRILLING_false, preL4);
         config.configure(preL4).permit(L4_true, preL5);
+        config.configure(preL5).ignore(L5_false);
         config.configure(preL5).permit(L5_true, finish);
         config.configure(finish).permit(L1_false, preL1);
 
-        stateMachine = new StateMachine<String, String>(preL1, config);
+        this.stateMachine = new StateMachine<String, String>(preL1, config);
     }
-
-    public static void setKafkaMessage(KafkaMessage kafkaMessage){
+    public void makeKafkaMessage(String message){
+        System.out.println("Statemachine received: "+message);
+    }
+    public void setKafkaMessage(KafkaMessage kafkaMessage){
         kafkaMessages.add(kafkaMessage);
-        stateMachine.fire(kafkaMessage.getItemName()+"_"+kafkaMessage.getValue());
+        if(kafkaMessage.getValue().equals("true") || kafkaMessage.getValue().equals("false")){
+
+            stateMachine.fire(kafkaMessage.getItemName()+"_"+kafkaMessage.getValue());
+        }else{
+            stateMachine.fire(kafkaMessage.getItemName());
+        }
+        System.out.println("Aktueller Zustand: "+stateMachine.getState());
+        Gson gson= new Gson();
+        String kafkaOutput=gson.toJson(kafkaMessage);
+        System.out.println(kafkaOutput);
     }
-    public static void setActivemqmessage(Activemqmessage activemqmessage){
-        MyMachine.activemqmessage = activemqmessage;
+    public  void setActivemqmessage(Activemqmessage activemqmessage){
+        this.activemqmessage = activemqmessage;
     }
     public  void setERPFile(ERPFile e){
         if(stateMachine.getState()=="finish"){
@@ -85,10 +109,10 @@ public class MyMachine {
             Product product=new Product(e,kafkaMessages,activemqmessage);
             Gson gson=new Gson();
             String jsonInString=gson.toJson(product);
-            System.out.println(jsonInString);// TODO Product übergeben
+            System.out.println("Produkt:"+jsonInString);// TODO Product übergeben
         }
     }
-    public static ERPFile getERPFile(){
+    public  ERPFile getERPFile(){
         return erp;
     }
     private void sendToStatemachine(String s){
