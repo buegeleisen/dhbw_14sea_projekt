@@ -79,7 +79,7 @@ public class Consumer extends AbstractExecutionThreadService {
                         Gson gson= new Gson();
                         KafkaMessage kafkaMessage = gson.fromJson(message, KafkaMessage.class);
                         //SparkProducer.setKafkaMessage(kafkaMessage);System.out.println("1");
-                        System.out.println(kafkaMessage.getValue());
+                        //System.out.println(kafkaMessage.getValue());
                         logger.info("Received: {}", message);
                         Worker.setKafkaMessage(kafkaMessage);
                         //Worker.distributeKafkaMessage(message);

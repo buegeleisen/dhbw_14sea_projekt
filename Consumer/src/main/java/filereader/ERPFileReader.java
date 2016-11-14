@@ -87,14 +87,18 @@ public class ERPFileReader implements Runnable {
     }
 
     public void run() {
-        try {
-            //initial read
-            read();
+        while(true) {
+            if(new File(observedPath).listFiles().length!=0) {
+                try {
+                    //initial read
+                    read();
 
-            //watching files
-            watch();
-        } catch (Exception e) {
-            e.printStackTrace();
+                    //watching files
+                    watch();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
     public static Vector<ERPFile> getERPFiles(){

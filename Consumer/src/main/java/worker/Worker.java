@@ -13,18 +13,18 @@ import java.util.Vector;
  * Created by migue on 12.11.2016.
  */
 public class Worker {
-    static ERPFile erp= ERPFileReader.getERPFiles().lastElement();//TODO muss noch ERP Queue
-    private static StatemachineQueue<MyMachine> queue = new StatemachineQueue();
-
+    public static StatemachineQueue<MyMachine> queue = new StatemachineQueue();
+    public static int id=1;
     public Worker(){
 
     }
     public static void init(Activemqmessage activemqmessage){
-        MyMachine state=new MyMachine();
+        MyMachine state=new MyMachine(id);
+        id++;
         System.out.println("Worker: Statemachine gestartet!");
         state.setActivemqmessage(activemqmessage);
         queue.add(state);
-        System.out.println("Worker: Queuesize:"+ queue.size());
+        //System.out.println("Worker: Queuesize:"+ queue.size());
         int blazeIt=420;
     }
 
@@ -40,15 +40,23 @@ public class Worker {
     }
     public static void setKafkaMessage(KafkaMessage kafkaMessage){ //TODO vll neue Methode mit der message. Denn hier hängts :(
         for(int i=0; i<queue.size(); i++){
-            queue.get(i).setKafkaMessage(kafkaMessage);
-            System.out.println("Worker is getting kafkamessage with value:"+kafkaMessage.getValue());
+            if(queue.get(i).getStateMachine().getState().equals("finish")){
+            }else{
+                queue.get(i).setKafkaMessage(kafkaMessage);
+            }
+            //System.out.println("Worker is getting kafkamessage with value:"+kafkaMessage.getValue());
         }
-    }
 
+    }
+    public static void sendKafkaToUI(KafkaMessage kafkaMessage){
+
+    }
     public static void setErpFile(ERPFile e){
-        erp=e;
         for(int i=0; i<queue.size(); i++){
-            queue.get(i).setERPFile(e);
+
+
+                queue.get(i).setERPFile(e);
+
         }
     }
 
