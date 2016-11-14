@@ -15,6 +15,14 @@ class ProductLayout extends Component {
     ));
   };
 
+  filterTable(count){
+    let table = [];
+    for(let i = 0; i<count; i++){
+      table.push(this.renderTable()[i]);
+    }
+    return table;
+  }
+
   countHandler(event){
     this.count = event.target.value;
     console.log(this.count);
@@ -33,8 +41,9 @@ class ProductLayout extends Component {
   }
 
 render() {
-  let count = 5;
+  let count = 2;
   let sort = 1;
+  console.log(this.filterTable(2));
 
   const render =(
     <div>

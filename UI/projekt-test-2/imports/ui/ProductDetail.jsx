@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-
 import BarChart from './BarChart.jsx';
-import {Panel} from 'react-bootstrap';
+import {Panel, ListGroup, ListGroupItem} from 'react-bootstrap';
+import LineChart from './LineChart.jsx';
+import * as Analysis from '../api/analysis.js';
 
 export default class ProductDetail extends Component {
 
@@ -27,7 +28,7 @@ export default class ProductDetail extends Component {
   }
 
   render() {
-
+    console.log(Analysis.getERPAverageArray());
 
     const render =(
       <div className="col-md-12 container">
@@ -44,9 +45,9 @@ export default class ProductDetail extends Component {
               <p>Timestamp: {this.props.product.activemq.timestamp}</p>
             </Panel>
           </div>
-          <div className="col-md-12">
+          <div className="col-md-6">
             <Panel header="Product Data">
-              <div className="col-md-4">
+              <div className="col-md-12">
                 <BarChart
                   values = {this.getERPFilesA()}
                   labels = {['a1','a2']}
@@ -55,7 +56,7 @@ export default class ProductDetail extends Component {
                   borderColor = {['rgba(255, 99, 132, 1)','rgba(255, 99, 132, 1)']}
                   />
               </div>
-              <div className="col-md-4">
+              <div className="col-md-12">
                 <BarChart
                   values = {this.getERPFilesB()}
                   labels = {['b1','b2']}
@@ -64,7 +65,7 @@ export default class ProductDetail extends Component {
                   borderColor = {['rgba(54, 162, 235, 1)','rgba(54, 162, 235, 1)']}
                   />
               </div>
-              <div className="col-md-4">
+              <div className="col-md-12">
                 <BarChart
                   values = {this.getERPFilesEM()}
                   labels = {['em1','em2']}
@@ -78,19 +79,45 @@ export default class ProductDetail extends Component {
 
 
 
-        <div className="col-md-12">
+        <div className="col-md-6">
             <Panel header="Comparison to Average of All Products">
-
+              <div className="col-md-12">
+                <BarChart
+                  values = {[Analysis.getERPAverageArray()[0],Analysis.getERPAverageArray()[1]]}
+                  labels = {['a1','a2']}
+                  label = "Analysis A"
+                  backgroundColor = {['rgba(255, 99, 132, 0.2)','rgba(255, 99, 132, 0.2)']}
+                  borderColor = {['rgba(255, 99, 132, 1)','rgba(255, 99, 132, 1)']}
+                  />
+              </div>
+              <div className="col-md-12">
+                <BarChart
+                  values = {[Analysis.getERPAverageArray()[2],Analysis.getERPAverageArray()[3]]}
+                  labels = {['b1','b2']}
+                  label = "Analysis B"
+                  backgroundColor = {['rgba(54, 162, 235, 0.2)','rgba(54, 162, 235, 0.2)']}
+                  borderColor = {['rgba(54, 162, 235, 1)','rgba(54, 162, 235, 1)']}
+                  />
+              </div>
+              <div className="col-md-12">
+                <BarChart
+                  values = {[Analysis.getERPAverageArray()[4],Analysis.getERPAverageArray()[5]]}
+                  labels = {['em1','em2']}
+                  label = "Analysis EM"
+                  backgroundColor = {['rgba(255, 206, 86, 0.2)','rgba(255, 206, 86, 0.2)']}
+                  borderColor = {['rgba(255, 206, 86, 1)','rgba(255, 206, 86, 1)']}
+                  />
+              </div>
           </Panel>
           </div>
+
           <div className="col-md-12">
             <Panel header="Comparison to Average of All Customer Products">
 
             </Panel>
           </div>
-      </div>
     );
-
+}
       return (
           render
             );
