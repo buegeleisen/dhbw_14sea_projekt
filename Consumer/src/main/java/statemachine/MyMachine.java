@@ -6,10 +6,8 @@ import com.github.oxo42.stateless4j.delegates.Action;
 import com.google.gson.Gson;
 import filereader.ERPFileReader;
 import main.Main;
-import objects.Activemqmessage;
-import objects.ERPFile;
-import objects.KafkaMessage;
-import objects.Product;
+import mongoUI.MeteorMapper;
+import objects.*;
 import scala.util.parsing.combinator.testing.Str;
 import spark.SparkProducer;
 import worker.Worker;
@@ -65,6 +63,8 @@ public class MyMachine{
     private  ERPFile erp;
 
     public int id;
+
+    MeteorMapper meteorMapper = new MeteorMapper();
 
     /*public MyMachine(){
         config.configure(preL1).ignore(L1_false);
@@ -276,6 +276,12 @@ public class MyMachine{
         }else{
             stateMachine.fire(kafkaMessage.getItemName());
         }
+        try {
+
+            meteorMapper.map(kafkaMessage);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         System.out.println("Aktueller Zustand(id: "+id+"): "+stateMachine.getState());
         Gson gson= new Gson();
         String kafkaOutput=gson.toJson(kafkaMessage);
@@ -287,10 +293,11 @@ public class MyMachine{
     public  void setERPFile(ERPFile e){
         if(stateMachine.getState().equals("finish")){
             erp=e;
-            Product product=new Product(e,kafkaMessages,activemqmessage);
+            Product product=createProduct(e,kafkaMessages,activemqmessage);
             Gson gson=new Gson();
             String jsonInString=gson.toJson(product);
             System.out.println("Produkt:"+jsonInString);// TODO Product an UI übergeben
+            meteorMapper.sendProduct(product);
             Worker.queue.removeFirst();
         }
     }
@@ -314,8 +321,28 @@ public class MyMachine{
         return stateMachine;
     }
 
-    public void createProduct(ERPFile e, Vector<KafkaMessage> kafkaMessages, Activemqmessage a){
-        Product product=new Product(e,kafkaMessages,activemqmessage);
+    public Product createProduct(ERPFile e, Vector<KafkaMessage> kafkaMessages, Activemqmessage a){
+        Vector<String> millspeed=new Vector<String>();
+        Vector<String> millheat=new Vector<String>();
+        Vector<String> drillspeed=new Vector<String>();
+        Vector<String> drillheat=new Vector<String>();
+        for(int i=0; i<kafkaMessages.size();i++){
+            if(kafkaMessages.get(i).getItemName().equals("MILLING_SPEED")){
+                millspeed.add(kafkaMessages.get(i).getValue());
+            }
+            if(kafkaMessages.get(i).getItemName().equals("MILLING_HEAT")){
+                millheat.add(kafkaMessages.get(i).getValue());
+            }
+            if(kafkaMessages.get(i).getItemName().equals("DRILLING_SPEED")){
+                drillspeed.add(kafkaMessages.get(i).getValue());
+            }
+            if(kafkaMessages.get(i).getItemName().equals("DRILLING_HEAT")){
+                drillheat.add(kafkaMessages.get(i).getValue());
+            }
+        }
+        ModifiedMessage m=new ModifiedMessage(millheat,millspeed,drillheat,drillspeed);
+        Product product=new Product(e,m,a);
+        return product;
     }
 
 
