@@ -279,6 +279,7 @@ public class MyMachine{
         try {
 
             meteorMapper.map(kafkaMessage);
+            System.out.println(kafkaMessage.toString());
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -296,7 +297,7 @@ public class MyMachine{
             Product product=createProduct(e,kafkaMessages,activemqmessage);
             Gson gson=new Gson();
             String jsonInString=gson.toJson(product);
-            System.out.println("Produkt:"+jsonInString);// TODO Product an UI übergeben
+            //System.out.println("Produkt (products):"+jsonInString);
             meteorMapper.sendProduct(product);
             Worker.queue.removeFirst();
         }
