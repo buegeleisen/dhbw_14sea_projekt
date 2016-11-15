@@ -43,11 +43,11 @@ class Machines extends Component{
           <div className="col-md-6">
             <Panel header="Milling Temperature">
                 <ListGroup fill>
-                  <ListGroupItem>Temperature: {this.renderLast(this.props.millingtemperaturedata)[0]}</ListGroupItem>
+                  <ListGroupItem>Temperature: {this.renderLast(this.props.millingheatdata)[0]}</ListGroupItem>
               </ListGroup>
               <div><LineChart
                 labelName="Milling Temperature"
-                yAxis={this.props.millingtemperaturedata}
+                yAxis={this.props.millingheatdata}
                 backgroundColor= "#D84315"
                 borderColor= "#D84315"
                 pointHoverBackgroundColor= "#D84315"
@@ -76,11 +76,11 @@ class Machines extends Component{
         <div className="col-md-6">
           <Panel header="Drilling Temperature">
             <ListGroup fill>
-              <ListGroupItem>Temperature: {this.renderLast(this.props.drillingtemperaturedata)[0]}</ListGroupItem>
+              <ListGroupItem>Temperature: {this.renderLast(this.props.drillingheatdata)[0]}</ListGroupItem>
           </ListGroup>
             <LineChart
               labelName="Drilling Temperature"
-              yAxis={this.props.drillingtemperaturedata}
+              yAxis={this.props.drillingheatdata}
               backgroundColor= "#548235"
               borderColor= "#548235"
               pointHoverBackgroundColor= "#548235"
@@ -111,16 +111,16 @@ class Machines extends Component{
 };
 
 Machines.propTypes = {
-  millingtemperaturedata: PropTypes.array.isRequired,
-  drillingtemperaturedata: PropTypes.array.isRequired,
+  millingheatdata: PropTypes.array.isRequired,
+  drillingheatdata: PropTypes.array.isRequired,
   drillingspeeddata: PropTypes.array.isRequired,
   millingspeeddata: PropTypes.array.isRequired,
 };
 
 export default createContainer(() => {
   return {
-    millingtemperaturedata: MillingTemperatureData.find({}, {sort:{_id:-1},limit: 5} ).fetch(),
-    drillingtemperaturedata: DrillingTemperatureData.find({}, {sort:{_id:-1},limit: 5} ).fetch(),
+    millingtemperaturedata: MillingHeatData.find({}, {sort:{_id:-1},limit: 5} ).fetch(),
+    drillingtemperaturedata: DrillingHeatData.find({}, {sort:{_id:-1},limit: 5} ).fetch(),
     drillingspeeddata: DrillingSpeedData.find({}, {sort:{_id:-1},limit: 5} ).fetch(),
     millingspeeddata: MillingSpeedData.find({}, {sort:{_id:-1},limit: 5} ).fetch(),
   };
