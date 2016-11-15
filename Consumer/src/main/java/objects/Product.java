@@ -5,14 +5,16 @@ import java.util.Vector;
  */
 public class Product {
     private ERPFile erpFile;
-    private Vector<KafkaMessage>  messages;
+    private Vector<KafkaMessage>  kafkamessages;
+    private Vector<ModifiedMessage> modified;
+    private ModifiedMessage machineData;
     private Activemqmessage activemq;
     //Variablen von ActiveMQ
 
 
-    public Product(ERPFile erpFile, Vector<KafkaMessage> messages, Activemqmessage activemq) {
+    public Product(ERPFile erpFile, ModifiedMessage machineData, Activemqmessage activemq) {
         this.erpFile = erpFile;
-        this.messages = messages;
+        this.machineData = machineData;
         this.activemq=activemq;
     }
 
@@ -25,11 +27,11 @@ public class Product {
     }
 
     public Vector<KafkaMessage> getMessages() {
-        return messages;
+        return kafkamessages;
     }
 
     public void setMessages(Vector<KafkaMessage> messages) {
-        this.messages = messages;
+        this.kafkamessages = messages;
     }
 
     public Activemqmessage getActivemq(){return activemq;}

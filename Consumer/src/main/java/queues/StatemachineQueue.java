@@ -6,10 +6,25 @@ import java.util.Queue;
 /**
  * Created by migue on 12.11.2016.
  */
-public class StatemachineQueue extends LinkedList {
-    Queue<MyMachine> stateQueue;
+public class StatemachineQueue<E> extends LinkedList<E> {
+
+
     public StatemachineQueue(){
-        stateQueue= new LinkedList<MyMachine>();
+
     }
 
+    @Override
+    public boolean add(E e) {
+        return super.add(e);
+    }
+
+    @Override
+    public E get(int index) {
+        return super.get(index);
+    }
+
+    @Override
+    public E poll() {
+        return super.poll();
+    }
 }
