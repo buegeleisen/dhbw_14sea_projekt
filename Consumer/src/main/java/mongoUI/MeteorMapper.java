@@ -29,12 +29,16 @@ public class MeteorMapper {
 
             if (itemName.equals("MILLING_SPEED")) {
                 meteorMongoConnector.insertJSON(json, "millingspeeddata");
+                System.out.println("DB - millingspeeddata: "+ json);
             } else if (itemName.equals("MILLING_HEAT")) {
                 meteorMongoConnector.insertJSON(json, "millingheatdata");
+                System.out.println("DB - millingheatdata: "+ json);
             } else if (itemName.equals("DRILLING_SPEED")) {
                 meteorMongoConnector.insertJSON(json, "drillingspeeddata");
+                System.out.println("DB - drillingspeeddata: "+ json);
             } else if (itemName.equals("DRILLING_HEAT")) {
                 meteorMongoConnector.insertJSON(json, "drillingheatdata");
+                System.out.println("DB - drillingheatdata: "+ json);
             }
         }
     }
@@ -44,10 +48,12 @@ public class MeteorMapper {
             LiveItem liveItem=new LiveItem(itemName);
             String json=gson.toJson(liveItem);
             meteorMongoConnector.insertJSON(json, "machinestatus");
+            System.out.println("DB - machinestatus: "+ json);
         }
     }
     public void sendProduct(Product product){
         String json=gson.toJson(product);
         meteorMongoConnector.insertJSON(json, "products");
+        System.out.println("DB - products: "+ json);
     }
 }
