@@ -55,9 +55,9 @@ public class ERPFileReader implements Runnable {
                 ERPFile test  = gson.fromJson(jsonInString, ERPFile.class);
                 erpfiles.add(test);
                 zeile = input.readLine();
-                SparkProducer.setERPFile(test);
+                //SparkProducer.setERPFile(test);
                 Worker.setErpFile(test);
-                System.out.println(erpfiles.elementAt(i).getA1());
+                //System.out.println(erpfiles.elementAt(i).getA1());
             }
             input.close();
             moveSourcePath = Paths.get(erppath);
