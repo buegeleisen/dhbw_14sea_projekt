@@ -4,6 +4,7 @@ import java.util.Vector;
  * Created by mrpon on 05.10.2016.
  */
 public class Product {
+    private String id;
     private ERPFile erpFile;
     private Vector<KafkaMessage>  kafkamessages;
     private Vector<ModifiedMessage> modified;
@@ -12,7 +13,8 @@ public class Product {
     //Variablen von ActiveMQ
 
 
-    public Product(ERPFile erpFile, ModifiedMessage machineData, Activemqmessage activemq) {
+    public Product(String id,ERPFile erpFile, ModifiedMessage machineData, Activemqmessage activemq) {
+        this.id=id;
         this.erpFile = erpFile;
         this.machineData = machineData;
         this.activemq=activemq;
