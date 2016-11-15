@@ -22,17 +22,7 @@ class Machines extends Component{
       <div className="col-md-12 container">
         <div>
           <h1 className="section-heading">Machine Overview</h1>
-          <Panel>
-            <div className="col-md-2"></div>
-            <div className="col-md-1">Sensor 1</div>
-            <div className="col-md-1">Sensor 2</div>
-            <div className="col-md-1">Milling</div>
-            <div className="col-md-1">Sensor 3</div>
-            <div className="col-md-1">Drilling</div>
-            <div className="col-md-1">Sensor 4</div>
-            <div className="col-md-1">Sensor 5</div>
 
-          </Panel>
         </div>
 
           <h1 className="section-heading">Milling Overview</h1>
@@ -41,13 +31,7 @@ class Machines extends Component{
                 <ListGroup fill>
                   <ListGroupItem>Temperature: {this.renderLast(this.props.millingheatdata)[0]}</ListGroupItem>
               </ListGroup>
-              <div><LineChart
-                labelName="Milling Temperature"
-                yAxis={this.props.millingheatdata}
-                backgroundColor= "#D84315"
-                borderColor= "#D84315"
-                pointHoverBackgroundColor= "#D84315"
-                /></div>
+              
             </Panel>
           </div>
           <div className="col-md-6">
@@ -55,13 +39,7 @@ class Machines extends Component{
               <ListGroup fill>
                 <ListGroupItem>Speed: {this.renderLast(this.props.millingspeeddata)[0]}</ListGroupItem>
             </ListGroup>
-              <LineChart
-                labelName="Milling Speed"
-                yAxis={this.props.millingspeeddata}
-                backgroundColor= "#D84315"
-                borderColor= "#D84315"
-                pointHoverBackgroundColor= "#D84315"
-                />
+
             </Panel>
           </div>
 
@@ -74,13 +52,7 @@ class Machines extends Component{
             <ListGroup fill>
               <ListGroupItem>Temperature: {this.renderLast(this.props.drillingheatdata)[0]}</ListGroupItem>
           </ListGroup>
-            <LineChart
-              labelName="Drilling Temperature"
-              yAxis={this.props.drillingheatdata}
-              backgroundColor= "#548235"
-              borderColor= "#548235"
-              pointHoverBackgroundColor= "#548235"
-              />
+
           </Panel>
         </div>
         <div className="col-md-6">
@@ -88,13 +60,7 @@ class Machines extends Component{
             <ListGroup fill>
               <ListGroupItem>Speed: {this.renderLast(this.props.drillingspeeddata)[0]}</ListGroupItem>
           </ListGroup>
-            <LineChart
-              labelName="Drilling Speed"
-              yAxis={this.props.drillingspeeddata}
-              backgroundColor= "#548235"
-              borderColor= "#548235"
-              pointHoverBackgroundColor= "#548235"
-              />
+
           </Panel>
         </div>
       </div>
@@ -111,6 +77,7 @@ Machines.propTypes = {
   drillingheatdata: PropTypes.array.isRequired,
   drillingspeeddata: PropTypes.array.isRequired,
   millingspeeddata: PropTypes.array.isRequired,
+
 };
 
 export default createContainer(() => {
