@@ -62,7 +62,7 @@ public class MyMachine{
     private  Activemqmessage activemqmessage= null;
     private  ERPFile erp;
 
-    public int id;
+    public String id;
 
     MeteorMapper meteorMapper = new MeteorMapper();
 
@@ -89,7 +89,7 @@ public class MyMachine{
 
         this.stateMachine = new StateMachine<String, String>(preL1, config);
     }*/
-    public MyMachine(int id){
+    public MyMachine(String id){
         config.configure(preL1).ignore(L1_false);
         config.configure(preL1).ignore(L2_false);
         config.configure(preL1).ignore(L2_true);
@@ -323,26 +323,26 @@ public class MyMachine{
     }
 
     public Product createProduct(ERPFile e, Vector<KafkaMessage> kafkaMessages, Activemqmessage a){
-        Vector<String> millspeed=new Vector<String>();
-        Vector<String> millheat=new Vector<String>();
-        Vector<String> drillspeed=new Vector<String>();
-        Vector<String> drillheat=new Vector<String>();
+        Vector<Double> millspeed=new Vector<Double>();
+        Vector<Double> millheat=new Vector<Double>();
+        Vector<Double> drillspeed=new Vector<Double>();
+        Vector<Double> drillheat=new Vector<Double>();
         for(int i=0; i<kafkaMessages.size();i++){
             if(kafkaMessages.get(i).getItemName().equals("MILLING_SPEED")){
-                millspeed.add(kafkaMessages.get(i).getValue());
+                millspeed.add(Double.parseDouble(kafkaMessages.get(i).getValue()));
             }
             if(kafkaMessages.get(i).getItemName().equals("MILLING_HEAT")){
-                millheat.add(kafkaMessages.get(i).getValue());
+                millheat.add(Double.parseDouble(kafkaMessages.get(i).getValue()));
             }
             if(kafkaMessages.get(i).getItemName().equals("DRILLING_SPEED")){
-                drillspeed.add(kafkaMessages.get(i).getValue());
+                drillspeed.add(Double.parseDouble(kafkaMessages.get(i).getValue()));
             }
             if(kafkaMessages.get(i).getItemName().equals("DRILLING_HEAT")){
-                drillheat.add(kafkaMessages.get(i).getValue());
+                drillheat.add(Double.parseDouble(kafkaMessages.get(i).getValue()));
             }
         }
         ModifiedMessage m=new ModifiedMessage(millheat,millspeed,drillheat,drillspeed);
-        Product product=new Product(e,m,a);
+        Product product=new Product(this.id,e,m,a);
         return product;
     }
 

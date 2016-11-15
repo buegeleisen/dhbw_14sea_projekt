@@ -8,6 +8,7 @@ import objects.KafkaMessage;
 import queues.StatemachineQueue;
 import statemachine.MyMachine;
 
+import java.util.UUID;
 import java.util.Vector;
 
 /**
@@ -17,12 +18,14 @@ public class Worker {
     public static StatemachineQueue<MyMachine> queue = new StatemachineQueue();
     public static int id=1;
     public  static MeteorMapper meteorMapper=new MeteorMapper();
+
     public Worker(){
 
     }
     public static void init(Activemqmessage activemqmessage){
+        String id = UUID.randomUUID().toString();
         MyMachine state=new MyMachine(id);
-        id++;
+
         System.out.println("Worker: Statemachine gestartet!");
         state.setActivemqmessage(activemqmessage);
         queue.add(state);

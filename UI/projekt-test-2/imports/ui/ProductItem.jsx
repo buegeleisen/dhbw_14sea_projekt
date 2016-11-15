@@ -33,7 +33,7 @@ export default class ProductItem extends Component{
   };
 
 ProductItem.propTypes= {
-  id: PropTypes.number,
+  id: PropTypes.string,
   timestamp: PropTypes.string,
   customer: PropTypes.number
 };
