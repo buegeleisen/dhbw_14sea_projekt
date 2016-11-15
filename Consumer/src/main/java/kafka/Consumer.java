@@ -12,8 +12,14 @@ import main.Main;
 import objects.KafkaMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import kafka.javaapi.producer.Producer;
+import kafka.producer.KeyedMessage;
+import kafka.producer.ProducerConfig;
 
 import org.apache.kafka.common.serialization.StringDeserializer;
+import spark.SparkProducer;
+import statemachine.MyMachine;
+import worker.Worker;
 
 import java.util.List;
 import java.util.Map;
@@ -70,10 +76,16 @@ public class Consumer extends AbstractExecutionThreadService {
                 public void run(){
                     for (MessageAndMetadata<byte[], byte[]> messageAndMetadata : messageStream) {
                         String message = new String(messageAndMetadata.message());
-
+                        Gson gson= new Gson();
+                        KafkaMessage kafkaMessage = gson.fromJson(message, KafkaMessage.class);
+                        //SparkProducer.setKafkaMessage(kafkaMessage);System.out.println("1");
+                        //System.out.println(kafkaMessage.getValue());
+                        logger.info("Received: {}", message);
+                        Worker.setKafkaMessage(kafkaMessage);
+                        //Worker.distributeKafkaMessage(message);
                         // to spark and Statemachine
 
-                        logger.info("Received: {}", message);
+
                     }
                 }
             });

@@ -1,17 +1,21 @@
 package objects;
-
+import java.util.Vector;
 /**
  * Created by mrpon on 05.10.2016.
  */
 public class Product {
     private ERPFile erpFile;
-    private KafkaMessage[] messages;
+    private Vector<KafkaMessage>  kafkamessages;
+    private Vector<ModifiedMessage> modified;
+    private ModifiedMessage machineData;
+    private Activemqmessage activemq;
     //Variablen von ActiveMQ
 
 
-    public Product(ERPFile erpFile, KafkaMessage[] messages) {
+    public Product(ERPFile erpFile, ModifiedMessage machineData, Activemqmessage activemq) {
         this.erpFile = erpFile;
-        this.messages = messages;
+        this.machineData = machineData;
+        this.activemq=activemq;
     }
 
     public ERPFile getErpFile() {
@@ -22,11 +26,15 @@ public class Product {
         this.erpFile = erpFile;
     }
 
-    public KafkaMessage[] getMessages() {
-        return messages;
+    public Vector<KafkaMessage> getMessages() {
+        return kafkamessages;
     }
 
-    public void setMessages(KafkaMessage[] messages) {
-        this.messages = messages;
+    public void setMessages(Vector<KafkaMessage> messages) {
+        this.kafkamessages = messages;
     }
+
+    public Activemqmessage getActivemq(){return activemq;}
+
+    public void setActivemq(Activemqmessage activemq){this.activemq=activemq;}
 }

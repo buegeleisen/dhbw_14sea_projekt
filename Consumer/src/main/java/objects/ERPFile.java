@@ -6,61 +6,72 @@ import java.math.BigInteger;
  * Created by mrpon on 12.10.2016.
  */
 public class ERPFile {
-    private float em1;
-    private float em2;
-    private float a1;
-    private float a2;
-    private float b1;
-    private float b2;
+    private double em1;
+    private double em2;
+    private double a1;
+    private double a2;
+    private double b1;
+    private double b2;
     private String overallStatus;
     private BigInteger ts_start;
     private BigInteger ts_stop;
 
-    public float getEm1() {
+    public ERPFile(double em1, double em2, double a1, double a2, double b1, double b2, String overallStatus, BigInteger ts_start, BigInteger ts_stop){
+        this.em1=em1;
+        this.em2=em2;
+        this.a1=a1;
+        this.a2=a2;
+        this.b1=b1;
+        this.b2=b2;
+        this.overallStatus=overallStatus;
+        this.ts_start=ts_start;
+        this.ts_stop=ts_stop;
+    }
+    public double getEm1() {
         return em1;
     }
 
-    public void setEm1(float em1) {
+    public void setEm1(double em1) {
         this.em1 = em1;
     }
 
-    public float getEm2() {
+    public double getEm2() {
         return em2;
     }
 
-    public void setEm2(float em2) {
+    public void setEm2(double em2) {
         this.em2 = em2;
     }
 
-    public float getA1() {
+    public double getA1() {
         return a1;
     }
 
-    public void setA1(float a1) {
+    public void setA1(double a1) {
         this.a1 = a1;
     }
 
-    public float getA2() {
+    public double getA2() {
         return a2;
     }
 
-    public void setA2(float a2) {
+    public void setA2(double a2) {
         this.a2 = a2;
     }
 
-    public float getB1() {
+    public double getB1() {
         return b1;
     }
 
-    public void setB1(float b1) {
+    public void setB1(double b1) {
         this.b1 = b1;
     }
 
-    public float getB2() {
+    public double getB2() {
         return b2;
     }
 
-    public void setB2(float b2) {
+    public void setB2(double b2) {
         this.b2 = b2;
     }
 
@@ -86,5 +97,20 @@ public class ERPFile {
 
     public void setTs_stop(BigInteger ts_stop) {
         this.ts_stop = ts_stop;
+    }
+
+    public String toString(){
+        String string=
+                "Em1: "+this.getEm1()+
+                        "\nEm2: "+this.getEm2()+
+                        "\nA1: "+this.getA1()+
+                        "\nA2: "+this.getA2()+
+                        "\nB2: "+this.getB2()+
+                        "\nB1: "+this.getB1()+
+                        "\nOverallStatus: "+this.getOverallStatus()+
+                        "\nTS_Start: "+this.getTs_start()+
+                        "\nTS_Stop: "+this.getTs_stop()+
+                        "\n";
+        return string;
     }
 }

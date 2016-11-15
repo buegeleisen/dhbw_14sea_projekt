@@ -1,48 +1,58 @@
-import React, { Component } from 'react';
-import {Button, Table} from 'react-bootstrap';
-import {CustomerCenterData} from '../api/customerData.js';
+import React, { Component, PropTypes } from 'react';
+import {Button, FormGroup, FormControl, ControlLabel} from 'react-bootstrap';
+import CustomerItem from'./CustomerItem.jsx';
 
-const customerCenter = (
-  <div className="col-md-12 container">
-    <div>
-      <h1 className="section-heading">Customer Center</h1>
-      </div>
-      <Table responsive>
-    <thead>
-      <tr>
-        <th>Customer Number</th>
-        <th>Customer Name</th>
-        <th>Order Number</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>Table cell</td>
-        <td>Table cell</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Table cell</td>
-        <td>Table cell</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Table cell</td>
-        <td>Table cell</td>
-      </tr>
-    </tbody>
-  </Table>
+import { createContainer } from 'meteor/react-meteor-data';
 
-  </div>
-);
+import {ProductData} from '../api/productData.js';
 
-export default React.createClass({
+
+class CustomerCenter extends Component{
+
+  mapMongoDB(){
+    return this.props.productData.map((item) => (
+       item.activemq.customernumber
+    ));
+  };
+
+  getMongoDBSet(){
+    return Array.from(new Set(this.mapMongoDB()));
+  }
+
+  renderTable(){
+    return this.getMongoDBSet().map((value) =>(
+      <CustomerItem key={value} customerid={value} />
+    ));
+  };
+
 
 
   render() {
+
+    const panel= (
+
+      <div className="col-md-12 container">
+      <div>
+        <h1 className="section-heading">Customer Center</h1>
+      </div>
+      <div className="col-md-12">
+        {this.renderTable()}
+      </div>
+    </div>
+    );
+
       return (
-          customerCenter
+        panel
             );
         }
-  });
+  };
+
+  CustomerCenter.propTypes = {
+    productData: PropTypes.array.isRequired,
+  };
+
+  export default createContainer(() => {
+    return {
+      productData: ProductData.find({}, {sort:{_id: -1}, limit: 40} ).fetch(),
+    };
+  }, CustomerCenter);

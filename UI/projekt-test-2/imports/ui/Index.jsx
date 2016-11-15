@@ -8,7 +8,7 @@ const index = (
     <div className="container">
       <img  src="logo_red_white.png"/>
       <h3>We make Data great again</h3>
-      <Button bsSize="large">Login</Button>
+      <Button bsSize="large" disabled>Login</Button>
     </div>
   </div>
   <div className="section">
@@ -17,7 +17,7 @@ const index = (
       <div className="col-md-4 item">
         <Glyphicon className="sticker" glyph="signal" />
         <h4>NICE CHARTS</h4>
-        <p>We used ChartJS 2 to display the data</p>
+        <p>We are using ChartJS 2 to display the data</p>
       </div>
       <div className="col-md-4 item">
         <Glyphicon className="sticker" glyph="time" />

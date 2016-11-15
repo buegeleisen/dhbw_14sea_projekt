@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Consumer/1.iml" filepath="$PROJECT_DIR$/Consumer/1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Statemachine/Statemachine.iml" filepath="$PROJECT_DIR$/Statemachine/Statemachine.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/T.iml" filepath="$PROJECT_DIR$/.idea/T.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Statemachine/statemachine.iml" filepath="$PROJECT_DIR$/Statemachine/statemachine.iml" />
     </modules>
   </component>
 </project>
