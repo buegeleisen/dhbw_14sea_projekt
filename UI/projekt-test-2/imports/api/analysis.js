@@ -58,3 +58,16 @@ export function getERPAverageArray(){
   total.push(parseInt(em2/array.length));
   return total;
 }
+
+export function getAverageKafkaM(){
+  let array = getAllProducts();
+  let mt = array.map((item) => (item.messages.millingtemperature).reduce(add,0)).reduce(add,0);
+  let ms = array.map((item) => (item.messages.millingspeed).reduce(add,0)).reduce(add,0);
+  let dt = array.map((item) => (item.messages.drillingtemperature).reduce(add,0)).reduce(add,0);
+  let ds = array.map((item) => (item.messages.drillingspeed).reduce(add,0)).reduce(add,0);
+  let total = [];
+  total.push(parseInt(mt/array.length));
+  total.push(parseInt(ms/array.length));
+  total.push(parseInt(dt/array.length));
+  total.push(parseInt(ds/array.length));
+}
