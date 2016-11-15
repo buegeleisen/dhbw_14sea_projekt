@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import ProductItem from './ProductItem.jsx';
-import {FormGroup, FormControl, ControlLabel} from 'react-bootstrap';
 
 import { createContainer } from 'meteor/react-meteor-data';
 
@@ -17,9 +16,6 @@ class ProductLayout extends Component {
 
 
 render() {
-  let count = 2;
-  let sort = 1;
-  console.log(this.filterTable(2));
 
   const render =(
     <div>
@@ -44,6 +40,6 @@ render() {
 
   export default createContainer(() => {
     return {
-      productData: ProductData.find({}, {sort:{_id: this.sort}, limit: this.count} ).fetch(),
+      productData: ProductData.find({}, {sort:{_id: -1}, limit: 40} ).fetch(),
     };
   }, ProductLayout);
