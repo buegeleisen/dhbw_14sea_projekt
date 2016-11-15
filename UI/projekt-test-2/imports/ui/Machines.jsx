@@ -12,7 +12,7 @@ class Machines extends Component{
   renderLast(array){
     return array.map((item) => (
      item.y
-  ));
+   ));
   }
 
   test(log){
@@ -27,17 +27,15 @@ class Machines extends Component{
         <div>
           <h1 className="section-heading">Machine Overview</h1>
           <Panel>
-            <div className="col-md-1"></div>
-            <div className="col-md-1">Status 1</div>
-            <div className="col-md-1">Status 1</div>
-            <div className="col-md-1">Status 1</div>
-            <div className="col-md-1">Status 1</div>
-            <div className="col-md-1">Status 1</div>
-            <div className="col-md-1">Status 1</div>
-            <div className="col-md-1">Status 1</div>
-            <div className="col-md-1">Status 1</div>
-            <div className="col-md-1">Status 1</div>
-            <div className="col-md-1">Status 1</div>
+            <div className="col-md-2"></div>
+            <div className="col-md-1">Sensor 1</div>
+            <div className="col-md-1">Sensor 2</div>
+            <div className="col-md-1">Milling</div>
+            <div className="col-md-1">Sensor 3</div>
+            <div className="col-md-1">Drilling</div>
+            <div className="col-md-1">Sensor 4</div>
+            <div className="col-md-1">Sensor 5</div>
+
           </Panel>
         </div>
 
@@ -83,7 +81,9 @@ class Machines extends Component{
             <LineChart
               labelName="Drilling Temperature"
               yAxis={this.props.drillingtemperaturedata}
-
+              backgroundColor= "#548235"
+              borderColor= "#548235"
+              pointHoverBackgroundColor= "#548235"
               />
           </Panel>
         </div>
@@ -95,7 +95,9 @@ class Machines extends Component{
             <LineChart
               labelName="Drilling Speed"
               yAxis={this.props.drillingspeeddata}
-
+              backgroundColor= "#548235"
+              borderColor= "#548235"
+              pointHoverBackgroundColor= "#548235"
               />
           </Panel>
         </div>

@@ -65,7 +65,7 @@ public class SparkProducer implements Runnable{
         while (true){
 
             if (kafkaMessages.size()==31&&activemqmessage!=null&&erp!=null){
-                product = new Product(erp, kafkaMessages, activemqmessage);
+                //product = new Product(erp, kafkaMessages, activemqmessage);
 
                 Gson gson = new Gson();
                 String jsonInString = gson.toJson(product);

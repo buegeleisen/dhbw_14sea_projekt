@@ -24,10 +24,12 @@
         <processorPath useClasspath="true" />
         <module name="1" />
         <module name="statemachine" />
+        <module name="Statemachine" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="1" target="1.5" />
+      <module name="Statemachine" target="1.5" />
       <module name="statemachine" target="1.5" />
     </bytecodeTargetLevel>
   </component>

@@ -22,7 +22,7 @@ public class Main {
         activemq.start();
 
         //FileReader
-        ERPFileReader fileReader = new ERPFileReader("C:/Users/artur.f/Downloads/kafka_2.11-0.10.0.0/kafka_2.11-0.10.0.0/Files/","C:/Users/artur.f/Downloads/kafka_2.11-0.10.0.0/kafka_2.11-0.10.0.0/Files/");//TODO: put your own paths
+        ERPFileReader fileReader = new ERPFileReader("C:/Users/migue/Desktop/ERP/","C:/Users/migue/Desktop/ERPp/");//TODO: put your own paths
         Thread fileThread = new Thread(fileReader);
         fileThread.start();
 
@@ -30,9 +30,7 @@ public class Main {
         Consumer consumer = new Consumer("192.168.99.100:1001", "prod");//TODO: put your own Kafka-ip
         consumer.start();
 
-        SparkProducer sparkConsumer= new SparkProducer();
-        Thread sparkThread= new Thread(sparkConsumer);
-        sparkThread.start();
+
 
 
     }

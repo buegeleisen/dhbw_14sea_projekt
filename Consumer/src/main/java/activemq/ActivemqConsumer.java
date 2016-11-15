@@ -11,6 +11,7 @@ import objects.Activemqmessage;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import spark.SparkProducer;
 import statemachine.MyMachine;
+import worker.Worker;
 
 import java.io.StringReader;
 import java.util.Properties;
@@ -65,13 +66,13 @@ public class ActivemqConsumer implements Runnable {
                         } catch (JMSException e) {
                             e.printStackTrace();
                         }
-                        SparkProducer.setActivemqmessage(xmlToActivemq(text));
-                        MyMachine.setActivemqmessage(xmlToActivemq(text));
-                        System.out.println("Received: " + text);
+                        //SparkProducer.setActivemqmessage(xmlToActivemq(text));
+                        Worker.init(xmlToActivemq(text));
+                        //System.out.println("Received: " + text);
                     } else {
-                        SparkProducer.setActivemqmessage(xmlToActivemq(message.toString()));
-                        MyMachine.setActivemqmessage(xmlToActivemq(message.toString()));
-                        System.out.println("Received: " + message);
+                        //SparkProducer.setActivemqmessage(xmlToActivemq(message.toString()));
+                        Worker.init(xmlToActivemq(message.toString()));
+                        //System.out.println("Received: " + message);
                     }
                 }
             });
