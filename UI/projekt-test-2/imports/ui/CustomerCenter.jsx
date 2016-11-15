@@ -53,6 +53,6 @@ class CustomerCenter extends Component{
 
   export default createContainer(() => {
     return {
-      productData: ProductData.find({}, {sort:{_id: this.sort}, limit: this.count} ).fetch(),
+      productData: ProductData.find({}, {sort:{_id: -1}, limit: 40} ).fetch(),
     };
   }, CustomerCenter);
