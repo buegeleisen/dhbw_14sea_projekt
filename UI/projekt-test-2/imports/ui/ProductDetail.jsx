@@ -27,6 +27,13 @@ export default class ProductDetail extends Component {
     return files;
   }
 
+  getArray(array){
+    let total = []
+    for(let i = 0; i<array.length; i++){
+      total.push({"x":i, "y":array[i]});
+    }
+  }
+
   render() {
     console.log(Analysis.getERPAverageArray());
 
@@ -120,12 +127,9 @@ export default class ProductDetail extends Component {
             <h1 className="section-heading">Milling & Drilling Overview</h1>
             <div className="col-md-6">
               <Panel header="Milling Temperature">
-                  <ListGroup fill>
-                    <ListGroupItem>Temperature: {}</ListGroupItem>
-                </ListGroup>
                 <div><LineChart
                   labelName="Milling Temperature"
-
+                  xAxis={getArray(this.props.product.machineData.millingHeat)}
                   backgroundColor= "#D84315"
                   borderColor= "#D84315"
                   pointHoverBackgroundColor= "#D84315"
@@ -134,12 +138,9 @@ export default class ProductDetail extends Component {
             </div>
             <div className="col-md-6">
               <Panel header="Milling Speed">
-                <ListGroup fill>
-                  <ListGroupItem>Speed: {}</ListGroupItem>
-              </ListGroup>
                 <LineChart
                   labelName="Milling Speed"
-
+                  xAxis={getArray(this.props.product.machineData.millingSpeed)}
                   backgroundColor= "#D84315"
                   borderColor= "#D84315"
                   pointHoverBackgroundColor= "#D84315"
@@ -148,12 +149,9 @@ export default class ProductDetail extends Component {
             </div>
           <div className="col-md-6">
             <Panel header="Drilling Temperature">
-              <ListGroup fill>
-                <ListGroupItem>Temperature: {}</ListGroupItem>
-            </ListGroup>
               <LineChart
                 labelName="Drilling Temperature"
-
+                xAxis={getArray(this.props.product.machineData.drillingHeat)}
                 backgroundColor= "#548235"
                 borderColor= "#548235"
                 pointHoverBackgroundColor= "#548235"
@@ -162,12 +160,9 @@ export default class ProductDetail extends Component {
           </div>
           <div className="col-md-6">
             <Panel header="Drilling Speed">
-              <ListGroup fill>
-                <ListGroupItem>Speed: {}</ListGroupItem>
-            </ListGroup>
               <LineChart
                 labelName="Drilling Speed"
-
+                xAxis={getArray(this.props.product.machineData.drillingSpeed)}
                 backgroundColor= "#548235"
                 borderColor= "#548235"
                 pointHoverBackgroundColor= "#548235"
