@@ -110,14 +110,74 @@ export default class ProductDetail extends Component {
               </div>
           </Panel>
           </div>
-
           <div className="col-md-12">
             <Panel header="Comparison to Average of All Customer Products">
 
             </Panel>
           </div>
+
+          <div className="col-md-12">
+            <h1 className="section-heading">Milling & Drilling Overview</h1>
+            <div className="col-md-6">
+              <Panel header="Milling Temperature">
+                  <ListGroup fill>
+                    <ListGroupItem>Temperature: {}</ListGroupItem>
+                </ListGroup>
+                <div><LineChart
+                  labelName="Milling Temperature"
+
+                  backgroundColor= "#D84315"
+                  borderColor= "#D84315"
+                  pointHoverBackgroundColor= "#D84315"
+                  /></div>
+              </Panel>
+            </div>
+            <div className="col-md-6">
+              <Panel header="Milling Speed">
+                <ListGroup fill>
+                  <ListGroupItem>Speed: {}</ListGroupItem>
+              </ListGroup>
+                <LineChart
+                  labelName="Milling Speed"
+
+                  backgroundColor= "#D84315"
+                  borderColor= "#D84315"
+                  pointHoverBackgroundColor= "#D84315"
+                  />
+              </Panel>
+            </div>
+          <div className="col-md-6">
+            <Panel header="Drilling Temperature">
+              <ListGroup fill>
+                <ListGroupItem>Temperature: {}</ListGroupItem>
+            </ListGroup>
+              <LineChart
+                labelName="Drilling Temperature"
+
+                backgroundColor= "#548235"
+                borderColor= "#548235"
+                pointHoverBackgroundColor= "#548235"
+                />
+            </Panel>
+          </div>
+          <div className="col-md-6">
+            <Panel header="Drilling Speed">
+              <ListGroup fill>
+                <ListGroupItem>Speed: {}</ListGroupItem>
+            </ListGroup>
+              <LineChart
+                labelName="Drilling Speed"
+
+                backgroundColor= "#548235"
+                borderColor= "#548235"
+                pointHoverBackgroundColor= "#548235"
+                />
+            </Panel>
+          </div>
+        </div>
+      </div>
     );
-}
+
       return (
           render
             );
