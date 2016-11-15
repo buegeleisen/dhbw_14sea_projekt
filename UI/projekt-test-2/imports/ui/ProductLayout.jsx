@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import ProductItem from './ProductItem.jsx';
-import {FormGroup, FormControl, ControlLabel} from 'react-bootstrap';
 
 import { createContainer } from 'meteor/react-meteor-data';
 
@@ -15,62 +14,14 @@ class ProductLayout extends Component {
     ));
   };
 
-  filterTable(count){
-    let table = [];
-    for(let i = 0; i<count; i++){
-      table.push(this.renderTable()[i]);
-    }
-    return table;
-  }
-
-  countHandler(event){
-    this.count = event.target.value;
-    console.log(this.count);
-  };
-
-  sortHandler(event){
-    if(event.target.value=="latest"){
-      this.sort = -1;
-      console.log(this.sort);
-    }
-    else if (event.target.value == "oldest") {
-      this.sort = 1;
-      console.log(this.sort);
-    }
-
-  }
 
 render() {
-  let count = 2;
-  let sort = 1;
-  console.log(this.filterTable(2));
 
   const render =(
     <div>
       <div className="col-md-12 container">
         <h1 className="section-heading">Product Overview</h1>
       </div>
-        <div className="col-md-2">
-          <FormGroup controlId="formControlsSelect">
-            <ControlLabel>Count</ControlLabel>
-            <FormControl componentClass="select" placeholder="select" onChange={this.countHandler}>
-              <option value={5}>5</option>
-              <option value={10}>10</option>
-              <option value={25}>25</option>
-              <option value={50}>50</option>
-              <option value={100}>100</option>
-            </FormControl>
-          </FormGroup>
-        </div>
-        <div className="col-md-2">
-          <FormGroup controlId="formControlsSelect">
-            <ControlLabel>Sorty By</ControlLabel>
-            <FormControl componentClass="select" placeholder="select" onChange={this.sortHandler}>
-              <option value="latest">latest</option>
-              <option value="oldest">oldest</option>
-            </FormControl>
-          </FormGroup>
-        </div>
         <div className="col-md-12">
           {this.renderTable()}
         </div>
@@ -89,6 +40,6 @@ render() {
 
   export default createContainer(() => {
     return {
-      productData: ProductData.find({}, {sort:{_id: this.sort}, limit: this.count} ).fetch(),
+      productData: ProductData.find({}, {sort:{_id: -1}, limit: 40} ).fetch(),
     };
   }, ProductLayout);

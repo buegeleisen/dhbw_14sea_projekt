@@ -58,3 +58,16 @@ export function getERPAverageArray(){
   total.push(parseInt(em2/array.length));
   return total;
 }
+
+export function getAverageMachineData(){
+  let array = getAllProducts();
+  let mt = array.map((item) => (item.machineData.millingHeat).reduce(add,0)).reduce(add,0);
+  let ms = array.map((item) => (item.machineData.millingSpeed).reduce(add,0)).reduce(add,0);
+  let dt = array.map((item) => (item.machineData.drillingHeat).reduce(add,0)).reduce(add,0);
+  let ds = array.map((item) => (item.machineData.drillingSpeed).reduce(add,0)).reduce(add,0);
+  let total = [];
+  total.push(parseInt(mt/array.length));
+  total.push(parseInt(ms/array.length));
+  total.push(parseInt(dt/array.length));
+  total.push(parseInt(ds/array.length));
+}
