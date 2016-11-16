@@ -53,7 +53,7 @@ public class MeteorMapper {
     }
     public void sendProduct(Product product){
         String json=gson.toJson(product);
-        meteorMongoConnector.insertJSON(json, "products");
+        meteorMongoConnector.insertJSON(json, "productData");
         System.out.println("DB - products: "+ json);
     }
 }

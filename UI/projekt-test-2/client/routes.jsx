@@ -2,7 +2,7 @@ import React from 'react';
 import {mount} from 'react-mounter';
 
 import Index from '../imports/ui/Index.jsx';
-import Machines from '../imports/ui/Machines.jsx';
+import Machines2 from '../imports/ui/Machines2.jsx';
 import {dashboard} from '../imports/ui/Dashboard.jsx';
 import CustomerCenter from '../imports/ui/CustomerCenter.jsx';
 import ProductLayout from '../imports/ui/ProductLayout.jsx';
@@ -22,7 +22,7 @@ FlowRouter.route('/', {
 FlowRouter.route('/machines', {
   action() {
       mount(dashboard, {
-        content: (<Machines/>)
+        content: (<Machines2/>)
       }
 
       )

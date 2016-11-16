@@ -4,19 +4,14 @@ import {ProductData} from '../api/productData.js';
 
 export default class ProductDetailLayout extends Component {
 
-  test(log){
-    console.log(log);
-  }
 
   findData(){
-    return ProductData.findOne({id: parseInt(this.props.id)});
+    return ProductData.findOne({id: this.props.id});
   }
 
 
 
   render() {
-    this.test(this.props.id);
-    this.test(this.findData());
 
 
     const render =(
