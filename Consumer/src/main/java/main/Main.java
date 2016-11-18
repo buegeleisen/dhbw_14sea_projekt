@@ -18,7 +18,7 @@ public class Main {
 
     public static void main (String[] args){
         //ActiveMQ Consumer
-        Thread activemq = new Thread(new ActivemqConsumer("tcp://192.168.99.100:32768"));//TODO: put your own Activemq-ip
+        Thread activemq = new Thread(new ActivemqConsumer("tcp://192.168.99.100:32774"));//TODO: put your own Activemq-ip
         activemq.start();
 
         //FileReader
