@@ -46,7 +46,6 @@ public class Consumer extends AbstractExecutionThreadService {
 
 
     public Consumer(String server, String topicName){
-        //BasicConfigurator.configure();
         Properties properties = new Properties();
         putProperties(properties, server);
         this.consumerConfig = new ConsumerConfig(properties);
@@ -78,14 +77,8 @@ public class Consumer extends AbstractExecutionThreadService {
                         String message = new String(messageAndMetadata.message());
                         Gson gson= new Gson();
                         KafkaMessage kafkaMessage = gson.fromJson(message, KafkaMessage.class);
-                        //SparkProducer.setKafkaMessage(kafkaMessage);System.out.println("1");
-                        //System.out.println(kafkaMessage.getValue());
                         logger.info("Received: {}", message);
                         Worker.setKafkaMessage(kafkaMessage);
-                        //Worker.distributeKafkaMessage(message);
-                        // to spark and Statemachine
-
-
                     }
                 }
             });

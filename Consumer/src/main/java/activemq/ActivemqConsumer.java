@@ -66,13 +66,9 @@ public class ActivemqConsumer implements Runnable {
                         } catch (JMSException e) {
                             e.printStackTrace();
                         }
-                        //SparkProducer.setActivemqmessage(xmlToActivemq(text));
                         Worker.init(xmlToActivemq(text));
-                        //System.out.println("Received: " + text);
                     } else {
-                        //SparkProducer.setActivemqmessage(xmlToActivemq(message.toString()));
                         Worker.init(xmlToActivemq(message.toString()));
-                        //System.out.println("Received: " + message);
                     }
                 }
             });
