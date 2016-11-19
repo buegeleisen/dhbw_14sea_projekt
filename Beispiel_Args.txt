@@ -1,0 +1,12 @@
+args[0]: (activemq) 192.168.99.100:32786
+args[1]: (kafka) 192.168.99.100:1001
+args[2]: (observedPath) C:/Users/migue/Desktop/ERP/
+args[3]: (processedPath) C:/Users/migue/Desktop/ERPp/
+args[4]: (mongoIP) localhost
+args[5]: (mongoPort) 3001
+
+Befehl mit Beispielen:
+java -jar C:\[Pfad]\Consumer.jar 192.168.99.100:32786 192.168.99.100:1001 C:/Users/migue/Desktop/ERP/ C:/Users/migue/Desktop/ERPp/ localhost 3001
+
+Befehl für Reichwald:
+java -jar TaktstrasseOpcServer-0.0.1-SNAPSHOT.jar  -o /C:\Users\migue\Desktop\ERP -d 1000 -amqp tcp://192.168.99.100:32768 -kafka 192.168.99.100:1000 -topic prod -m

@@ -1,9 +1,14 @@
 package mongoUI;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBCollection;
+import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import main.Args;
 import org.bson.Document;
+import org.mortbay.util.ajax.JSON;
 
 /**
  * Created by mrpon on 17.10.2016.
@@ -16,7 +21,8 @@ public class MeteorMongoConnector {
 
     // Connection
     public MeteorMongoConnector(){
-        mongoClient = new MongoClient(standardMeteorIp , standardMeteorPort);
+        mongoClient = new MongoClient(Args.getMeteorIP(), Args.getMeteorPort()) ;
+        database =mongoClient.getDatabase("meteor");
     }
 
     public MeteorMongoConnector(String ip, String port){
@@ -36,13 +42,14 @@ public class MeteorMongoConnector {
     }
 
     public void insertJSON(String JsonString, String collection){
-        if(database == null){
-            database =mongoClient.getDatabase("db");
-        }
+
+
+
         Document document = Document.parse(JsonString);
         MongoCollection<Document> mongoCollection = database.getCollection(collection);
         mongoCollection.insertOne(document);
     }
+
 
     public static String getStandardMeteorIp() {
         return standardMeteorIp;

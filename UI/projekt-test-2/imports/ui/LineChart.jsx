@@ -5,22 +5,23 @@ import {Line} from 'react-chartjs-2';
 export default class LineChart extends Component{
     render() {
          const data = {
+            labels: this.props.xAxis,
             datasets: [{
             label: this.props.labelName,
-            data: this.props.lineChartData,
+            data: this.props.yAxis,
             fill: false,
-            lineTension: 0.1,
-            backgroundColor: "rgba(75,192,192,0.4)",
-            borderColor: "rgba(75,192,192,1)",
+            lineTension: 0.3,
+            backgroundColor: this.props.backgroundColor,
+            borderColor: this.props.borderColor,
             borderCapStyle: 'butt',
             borderDash: [],
             borderDashOffset: 0.0,
             borderJoinStyle: 'miter',
-            pointBorderColor: "rgba(75,192,192,1)",
+            pointBorderColor: this.props.pointBorderColor,
             pointBackgroundColor: "#fff",
-            pointBorderWidth: 1,
+            pointBorderWidth: 4,
             pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgba(75,192,192,1)",
+            pointHoverBackgroundColor: this.props.pointHoverBackgroundColor,
             pointHoverBorderColor: "rgba(220,220,220,1)",
             pointHoverBorderWidth: 2,
             pointRadius: 1,
@@ -54,6 +55,10 @@ export default class LineChart extends Component{
 };
 
 LineChart.propTypes = {
-  lineChartData: PropTypes.array,
+  backgroundColor : PropTypes.string,
+  borderColor: PropTypes.string,
+  pointHoverBackgroundColor: PropTypes.string,
+  yAxis: PropTypes.array,
+  xAxis: PropTypes.array,
   labelName: PropTypes.string
 };

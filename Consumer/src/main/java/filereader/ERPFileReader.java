@@ -5,10 +5,16 @@
 package filereader;
 
 import com.google.gson.Gson;
+import kafka.javaapi.producer.Producer;
+import kafka.producer.KeyedMessage;
+import kafka.producer.ProducerConfig;
 import objects.ERPFile;
+import spark.SparkProducer;
+import worker.Worker;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.util.Properties;
 import java.util.Vector;
 import java.nio.file.StandardWatchEventKinds;
 import java.nio.file.Path;
@@ -39,7 +45,7 @@ public class ERPFileReader implements Runnable {
         Path moveSourcePath = null;
         Path moveTargetPath = null;
 
-        for (int i = 0; i < fileArray.length; i++) {
+        for (int i = 0; i < fileArray.length; i++) {//TODO: Gibt nur die ERPs am Anfang aus, danach nichts. Was wenn fileArray leer? Dann läuft die Schleife nie und wird nie betreten
             erppath = observedPath + fileArray[i].getName();
             BufferedReader input = new BufferedReader(new java.io.FileReader(erppath));
             String zeile = null;
@@ -49,7 +55,9 @@ public class ERPFileReader implements Runnable {
                 ERPFile test  = gson.fromJson(jsonInString, ERPFile.class);
                 erpfiles.add(test);
                 zeile = input.readLine();
-                System.out.println(erpfiles.elementAt(i).getA1());
+                //SparkProducer.setERPFile(test);
+                Worker.setErpFile(test);
+                //System.out.println(erpfiles.elementAt(i).getA1());
             }
             input.close();
             moveSourcePath = Paths.get(erppath);
@@ -79,14 +87,21 @@ public class ERPFileReader implements Runnable {
     }
 
     public void run() {
-        try {
-            //initial read
-            read();
+        while(true) {
+            if(new File(observedPath).listFiles().length!=0) {
+                try {
+                    //initial read
+                    read();
 
-            //watching files
-            watch();
-        } catch (Exception e) {
-            e.printStackTrace();
+                    //watching files
+                    watch();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
+    }
+    public static Vector<ERPFile> getERPFiles(){
+        return erpfiles;
     }
 }

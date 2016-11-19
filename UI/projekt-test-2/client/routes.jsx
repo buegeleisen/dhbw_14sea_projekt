@@ -2,10 +2,13 @@ import React from 'react';
 import {mount} from 'react-mounter';
 
 import Index from '../imports/ui/Index.jsx';
-import Machines from '../imports/ui/Machines.jsx';
+import Machines2 from '../imports/ui/Machines2.jsx';
 import {dashboard} from '../imports/ui/Dashboard.jsx';
 import CustomerCenter from '../imports/ui/CustomerCenter.jsx';
 import ProductLayout from '../imports/ui/ProductLayout.jsx';
+import ProductDetailLayout from '../imports/ui/ProductDetailLayout.jsx';
+import CustomerDetailLayout from '../imports/ui/CustomerDetailLayout.jsx';
+
 
 FlowRouter.route('/', {
   action() {
@@ -19,7 +22,7 @@ FlowRouter.route('/', {
 FlowRouter.route('/machines', {
   action() {
       mount(dashboard, {
-        content: (<Machines/>)
+        content: (<Machines2/>)
       }
 
       )
@@ -36,10 +39,31 @@ FlowRouter.route('/customercenter', {
   }
 });
 
+FlowRouter.route('/customercenter/:id', {
+  action(params) {
+      mount(dashboard, {
+        content: (<CustomerDetailLayout id = {params.id}/>)
+      }
+
+      )
+  }
+});
+
 FlowRouter.route('/products', {
   action() {
       mount(dashboard, {
         content: (<ProductLayout/>)
+      }
+
+      )
+  }
+});
+
+
+FlowRouter.route('/products/:id', {
+  action(params) {
+      mount(dashboard, {
+        content: (<ProductDetailLayout id = {params.id}/>)
       }
 
       )

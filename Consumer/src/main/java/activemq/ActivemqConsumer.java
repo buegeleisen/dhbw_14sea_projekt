@@ -1,7 +1,20 @@
 package activemq;
 import javax.jms.*;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 
+import kafka.javaapi.producer.Producer;
+import kafka.producer.KeyedMessage;
+import kafka.producer.ProducerConfig;
+import objects.Activemqmessage;
 import org.apache.activemq.ActiveMQConnectionFactory;
+import spark.SparkProducer;
+import statemachine.MyMachine;
+import worker.Worker;
+
+import java.io.StringReader;
+import java.util.Properties;
 
 public class ActivemqConsumer implements Runnable {
     Session session = null;
@@ -10,6 +23,20 @@ public class ActivemqConsumer implements Runnable {
 
     public ActivemqConsumer(String dest) {
         this.dest = dest;
+    }
+
+    private Activemqmessage xmlToActivemq(String xml){
+        JAXBContext jaxbContext = null;
+        try {
+            jaxbContext = JAXBContext.newInstance(Activemqmessage.class);
+            Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+            StringReader reader = new StringReader(xml);
+            Activemqmessage activemqmessage = (Activemqmessage) unmarshaller.unmarshal(reader);
+            return activemqmessage;
+        } catch (JAXBException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public void run() {
@@ -39,9 +66,9 @@ public class ActivemqConsumer implements Runnable {
                         } catch (JMSException e) {
                             e.printStackTrace();
                         }
-                        System.out.println("Received: " + text);
+                        Worker.init(xmlToActivemq(text));
                     } else {
-                        System.out.println("Received: " + message);
+                        Worker.init(xmlToActivemq(message.toString()));
                     }
                 }
             });
