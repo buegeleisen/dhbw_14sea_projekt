@@ -41,7 +41,6 @@ public class MyMachine{
     public static String DRILLING_SPEED="DRILLING_SPEED";
     public static String MILLING_HEAT="MILLING_HEAT";
     public static String MILLING_SPEED="MILLING_SPEED";
-    //public static String kill="kill";
 
     //States
     public static String preL1 = "preL1";
@@ -54,7 +53,6 @@ public class MyMachine{
     public static String preMilling = "preMilling";
     public static String preDrilling = "preDrilling";
     public static String finish = "finish";
-   // public static String dead="dead";
 
 
     private Gson gson = new Gson();
@@ -70,29 +68,6 @@ public class MyMachine{
 
     MeteorMapper meteorMapper = new MeteorMapper();
 
-    /*public MyMachine(){
-        config.configure(preL1).ignore(L1_false);
-        config.configure(preL1).permit(L1_true, preL2);
-        config.configure(preL2).ignore(L2_false);
-        config.configure(preL2).permit(L2_true, preMilling);
-        config.configure(preMilling).permit(L3_false, Milling);
-        config.configure(Milling).ignore(MILLING_true);
-        config.configure(Milling).ignore(MILLING_SPEED);
-        config.configure(Milling).ignore(MILLING_HEAT);
-        config.configure(Milling).permit(MILLING_false, preL3);
-        config.configure(preL3).permit(L3_true, preDrilling);
-        config.configure(preDrilling).permit(L4_false, Drilling);
-        config.configure(Drilling).ignore(DRILLING_true);
-        config.configure(Drilling).ignore(DRILLING_SPEED);
-        config.configure(Drilling).ignore(DRILLING_HEAT);
-        config.configure(Drilling).permit(DRILLING_false, preL4);
-        config.configure(preL4).permit(L4_true, preL5);
-        config.configure(preL5).ignore(L5_false);
-        config.configure(preL5).permit(L5_true, finish);
-        //config.configure(finish).permit(kill, dead);
-
-        this.stateMachine = new StateMachine<String, String>(preL1, config);
-    }*/
     public MyMachine(String id){
         config.configure(preL1).ignore(L1_false);
         config.configure(preL1).ignore(L2_false);
@@ -269,9 +244,6 @@ public class MyMachine{
     }
 
 
-    public void makeKafkaMessage(String message){
-        System.out.println("Statemachine received: "+message);
-    }
     public void setKafkaMessage(KafkaMessage kafkaMessage){
         kafkaMessages.add(kafkaMessage);
         if(kafkaMessage.getValue().equals("true") || kafkaMessage.getValue().equals("false")){
@@ -284,14 +256,10 @@ public class MyMachine{
 
             meteorMapper.map(kafkaMessage);
             System.out.println(kafkaMessage.toString());
-            //sparkFire(kafkaMessage.toString());
         }catch(Exception e){
             e.printStackTrace();
         }
         System.out.println("Aktueller Zustand(id: "+id+"): "+stateMachine.getState());
-        Gson gson= new Gson();
-        String kafkaOutput=gson.toJson(kafkaMessage);
-        //System.out.println(kafkaOutput);
     }
     public  void setActivemqmessage(Activemqmessage activemqmessage){
         this.activemqmessage = activemqmessage;
@@ -300,17 +268,11 @@ public class MyMachine{
         if(stateMachine.getState().equals("finish")){
             erp=e;
             Product product=createProduct(e,kafkaMessages,activemqmessage);
-            Gson gson=new Gson();
-            String jsonInString=gson.toJson(product);
-            //sparkFire(jsonInString);
-            //System.out.println("Produkt (products):"+jsonInString);
             meteorMapper.sendProduct(product);
             Worker.queue.removeFirst();
         }
     }
-    public  ERPFile getERPFile(){
-        return erp;
-    }
+
     private void sendToStatemachine(String s){
         KafkaMessage message = gson.fromJson(s, KafkaMessage.class);
         if(message.getValue().equals("true") || message.getValue().equals("false")){
