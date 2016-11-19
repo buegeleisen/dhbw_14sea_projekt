@@ -284,7 +284,7 @@ public class MyMachine{
 
             meteorMapper.map(kafkaMessage);
             System.out.println(kafkaMessage.toString());
-            sparkFire(kafkaMessage.toString());
+            //sparkFire(kafkaMessage.toString());
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -331,7 +331,7 @@ public class MyMachine{
         producer.send(new ProducerRecord<String, String>("spark", message)); //topic: spark
         producer.close();
         System.out.println("fertig");
-        //TODO: docker run --name sparkkafka -d -p 1003:2181 -p 1002:9092 --env ADVERTISED_HOST=192.168.99.100 --env ADVERTISED_PORT=1002 spotify/kafka
+        //TOD: docker run --name sparkkafka -d -p 1003:2181 -p 1002:9092 --env ADVERTISED_HOST=192.168.99.100 --env ADVERTISED_PORT=1002 spotify/kafka
     }
 
     public StateMachineConfig<String, String> getConfig() {
