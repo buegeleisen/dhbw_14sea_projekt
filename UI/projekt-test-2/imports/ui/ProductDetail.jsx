@@ -36,6 +36,7 @@ export default class ProductDetail extends Component {
   }
 
   render() {
+    console.log(this.props.product);
 
     const render =(
       <div className="col-md-12 container">
@@ -125,7 +126,7 @@ export default class ProductDetail extends Component {
                 <LineChart
                   axes
                   interpolate={'cardinal'}
-                  data={[this.getLineArray(this.props.product.millingHeat)]}
+                  data={[this.props.product.machineData.millingHeat]}
                   width={400}
                   height={300}
                   />
@@ -136,7 +137,7 @@ export default class ProductDetail extends Component {
                 <LineChart
                   axes
                   interpolate={'cardinal'}
-                  data={[this.getLineArray(this.props.product.millingHeat)]}
+                  data={[this.props.product.machineData.millingSpeed]}
                   width={400}
                   height={300}
                   />
@@ -147,7 +148,7 @@ export default class ProductDetail extends Component {
               <LineChart
                 axes
                 interpolate={'cardinal'}
-                data={[this.getLineArray(this.props.product.millingHeat)]}
+                data={[this.props.product.machineData.drillingHeat]}
                 width={400}
                 height={300}
                 />
@@ -158,7 +159,7 @@ export default class ProductDetail extends Component {
               <LineChart
                 axes
                 interpolate={'cardinal'}
-                data={[this.getLineArray(this.props.product.millingHeat)]}
+                data={[this.props.product.machineData.drillingSpeed]}
                 width={400}
                 height={300}
                 />
