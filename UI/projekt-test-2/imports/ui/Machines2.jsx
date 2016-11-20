@@ -1,13 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
-
-import LineChart from './LineChart.jsx';
+import {LineChart} from 'react-easy-chart';
 import {Panel, ListGroup, ListGroupItem} from 'react-bootstrap';
 import { MillingHeatData, DrillingHeatData, MillingSpeedData, DrillingSpeedData } from '../api/chartData.js';
 
 
 
-class Machines extends Component{
+class Machines2 extends Component{
 
   renderLast(array){
     return array.map((item) => (
@@ -31,7 +30,15 @@ class Machines extends Component{
                 <ListGroup fill>
                   <ListGroupItem>Temperature: {this.renderLast(this.props.millingheatdata)[0]}</ListGroupItem>
               </ListGroup>
-              
+              <div>
+                <LineChart
+                  axes
+                  interpolate={'cardinal'}
+                  data={[this.props.millingheatdata]}
+                  width={400}
+                  height={300}
+                  />
+              </div>
             </Panel>
           </div>
           <div className="col-md-6">
@@ -39,7 +46,15 @@ class Machines extends Component{
               <ListGroup fill>
                 <ListGroupItem>Speed: {this.renderLast(this.props.millingspeeddata)[0]}</ListGroupItem>
             </ListGroup>
-
+            <div>
+              <LineChart
+                axes
+                interpolate={'cardinal'}
+                data={[this.props.millingspeeddata]}
+                width={400}
+                height={300}
+                />
+            </div>
             </Panel>
           </div>
 
@@ -52,7 +67,15 @@ class Machines extends Component{
             <ListGroup fill>
               <ListGroupItem>Temperature: {this.renderLast(this.props.drillingheatdata)[0]}</ListGroupItem>
           </ListGroup>
-
+          <div>
+            <LineChart
+              axes
+              interpolate={'cardinal'}
+              data={[this.props.drillingheatdata]}
+              width={400}
+              height={300}
+              />
+          </div>
           </Panel>
         </div>
         <div className="col-md-6">
@@ -60,7 +83,15 @@ class Machines extends Component{
             <ListGroup fill>
               <ListGroupItem>Speed: {this.renderLast(this.props.drillingspeeddata)[0]}</ListGroupItem>
           </ListGroup>
-
+          <div>
+            <LineChart
+              axes
+              interpolate={'cardinal'}
+              data={[this.props.drillingspeeddata]}
+              width={400}
+              height={300}
+              />
+          </div>
           </Panel>
         </div>
       </div>
@@ -72,7 +103,7 @@ class Machines extends Component{
   }
 };
 
-Machines.propTypes = {
+Machines2.propTypes = {
   millingheatdata: PropTypes.array.isRequired,
   drillingheatdata: PropTypes.array.isRequired,
   drillingspeeddata: PropTypes.array.isRequired,
@@ -87,4 +118,4 @@ export default createContainer(() => {
     drillingspeeddata: DrillingSpeedData.find({}, {sort:{_id:-1},limit: 5} ).fetch(),
     millingspeeddata: MillingSpeedData.find({}, {sort:{_id:-1},limit: 5} ).fetch(),
   };
-}, Machines);
+}, Machines2);

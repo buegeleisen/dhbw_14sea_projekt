@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import BarChart from './BarChart.jsx';
 import {Panel, ListGroup, ListGroupItem} from 'react-bootstrap';
-import LineChart from './LineChart.jsx';
+import {LineChart} from 'react-easy-chart';
 import * as Analysis from '../api/analysis.js';
 
 export default class ProductDetail extends Component {
@@ -27,17 +27,15 @@ export default class ProductDetail extends Component {
     return files;
   }
 
-  getArray(array){
-    let total = []
+  getLineArray(array){
+    let total = [];
     for(let i = 0; i<array.length; i++){
-        total.push(i);
+        let data = {"x": i,"y": array[i]};
+        total.push(data);
     }
   }
 
   render() {
-    console.log(Analysis.getERPAverageArray());
-
-
 
     const render =(
       <div className="col-md-12 container">
@@ -120,8 +118,53 @@ export default class ProductDetail extends Component {
           </Panel>
           </div>
 
-
-
+          <div className="col-md-12">
+            <h1 className="section-heading">Milling & Drilling Overview</h1>
+            <div className="col-md-6">
+              <Panel header="Milling Temperature">
+                <LineChart
+                  axes
+                  interpolate={'cardinal'}
+                  data={[this.getLineArray(this.props.product.millingHeat)]}
+                  width={400}
+                  height={300}
+                  />
+              </Panel>
+            </div>
+            <div className="col-md-6">
+              <Panel header="Milling Speed">
+                <LineChart
+                  axes
+                  interpolate={'cardinal'}
+                  data={[this.getLineArray(this.props.product.millingHeat)]}
+                  width={400}
+                  height={300}
+                  />
+              </Panel>
+            </div>
+          <div className="col-md-6">
+            <Panel header="Drilling Temperature">
+              <LineChart
+                axes
+                interpolate={'cardinal'}
+                data={[this.getLineArray(this.props.product.millingHeat)]}
+                width={400}
+                height={300}
+                />
+            </Panel>
+          </div>
+          <div className="col-md-6">
+            <Panel header="Drilling Speed">
+              <LineChart
+                axes
+                interpolate={'cardinal'}
+                data={[this.getLineArray(this.props.product.millingHeat)]}
+                width={400}
+                height={300}
+                />
+            </Panel>
+          </div>
+        </div>
       </div>
     );
 
