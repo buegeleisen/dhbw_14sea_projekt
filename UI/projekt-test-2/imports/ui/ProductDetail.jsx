@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import BarChart from './BarChart.jsx';
 import {Panel, ListGroup, ListGroupItem} from 'react-bootstrap';
+import {LineChart} from 'react-easy-chart';
 import * as Analysis from '../api/analysis.js';
 
 export default class ProductDetail extends Component {
@@ -26,7 +27,19 @@ export default class ProductDetail extends Component {
     return files;
   }
 
+  getArray(array){
+    return array.map((item)=>{
+      item
+    })
+  }
 
+  getLineArray(array){
+    let total = [];
+    for(let i = 0; i < array.length; i++){
+        let data = {"x": i,"y": array[i]};
+        total.push(data);
+    }
+  }
 
   render() {
     console.log(this.props.product);
@@ -112,7 +125,8 @@ export default class ProductDetail extends Component {
               </div>
           </Panel>
           </div>
-
+      </div>
+    );
 
       return (
           render
