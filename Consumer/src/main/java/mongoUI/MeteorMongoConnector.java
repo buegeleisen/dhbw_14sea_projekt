@@ -6,6 +6,7 @@ import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import main.Args;
 import org.bson.Document;
 import org.mortbay.util.ajax.JSON;
 
@@ -20,7 +21,7 @@ public class MeteorMongoConnector {
 
     // Connection
     public MeteorMongoConnector(){
-        mongoClient = new MongoClient(standardMeteorIp , standardMeteorPort);
+        mongoClient = new MongoClient(Args.getMeteorIP(), Args.getMeteorPort()) ;
         database =mongoClient.getDatabase("meteor");
     }
 
