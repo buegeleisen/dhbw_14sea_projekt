@@ -3,7 +3,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 
 import LineChart from './LineChart.jsx';
 import {Panel, ListGroup, ListGroupItem} from 'react-bootstrap';
-import { MillingTemperatureData, DrillingTemperatureData, MillingSpeedData, DrillingSpeedData } from '../api/chartData.js';
+import { MillingHeatData, DrillingHeatData, MillingSpeedData, DrillingSpeedData } from '../api/chartData.js';
 
 
 
@@ -13,10 +13,6 @@ class Machines extends Component{
     return array.map((item) => (
      item.y
    ));
-  }
-
-  test(log){
-    console.log(log)
   }
 
   render(){
@@ -119,8 +115,8 @@ Machines.propTypes = {
 
 export default createContainer(() => {
   return {
-    millingtemperaturedata: MillingHeatData.find({}, {sort:{_id:-1},limit: 5} ).fetch(),
-    drillingtemperaturedata: DrillingHeatData.find({}, {sort:{_id:-1},limit: 5} ).fetch(),
+    millingheatdata: MillingHeatData.find({}, {sort:{_id:-1},limit: 5} ).fetch(),
+    drillingheatdata: DrillingHeatData.find({}, {sort:{_id:-1},limit: 5} ).fetch(),
     drillingspeeddata: DrillingSpeedData.find({}, {sort:{_id:-1},limit: 5} ).fetch(),
     millingspeeddata: MillingSpeedData.find({}, {sort:{_id:-1},limit: 5} ).fetch(),
   };

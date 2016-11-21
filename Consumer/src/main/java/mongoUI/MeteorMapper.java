@@ -6,6 +6,8 @@ import objects.LiveItem;
 import objects.Point;
 import objects.Product;
 
+import static java.awt.SystemColor.text;
+
 /**
  * Created by mrpon on 17.10.2016.
  */
@@ -22,9 +24,11 @@ public class MeteorMapper {
     public void map(KafkaMessage message) {
         if (!message.getValue().toString().equals("true") && !message.getValue().toString().equals("false")) {
             String itemName = message.getItemName();
-
+            String timeStamp=message.getTimestamp().toString();
+            String shorter=timeStamp.substring(timeStamp.length()-7, timeStamp.length()-1);
+            System.out.println("Gekürzter TimeStamp :"+shorter);
             //Insert a simple xy point into DB
-            Point point = new Point(Double.parseDouble(message.getTimestamp().toString()), Double.parseDouble(message.getValue()));
+            Point point = new Point(Double.parseDouble(shorter), Double.parseDouble(message.getValue()));
             String json = gson.toJson(point);
 
             if (itemName.equals("MILLING_SPEED")) {
@@ -53,7 +57,7 @@ public class MeteorMapper {
     }
     public void sendProduct(Product product){
         String json=gson.toJson(product);
-        meteorMongoConnector.insertJSON(json, "products");
+        meteorMongoConnector.insertJSON(json, "productData");
         System.out.println("DB - products: "+ json);
     }
 }

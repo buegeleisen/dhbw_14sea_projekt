@@ -6,12 +6,12 @@ import java.util.Vector;
  * Created by migue on 15.11.2016.
  */
 public class ModifiedMessage {
-    private Vector<String> drillingHeat;
-    private Vector<String> drillingSpeed;
-    private Vector<String> millingHeat;
-    private Vector<String> millingSpeed;
+    private Vector<Double> drillingHeat;
+    private Vector<Double> drillingSpeed;
+    private Vector<Double> millingHeat;
+    private Vector<Double> millingSpeed;
 
-    public ModifiedMessage(Vector<String> millingHeat, Vector<String> millingSpeed, Vector<String> drillingHeat, Vector<String> drillingSpeed){
+    public ModifiedMessage(Vector<Double> millingHeat, Vector<Double> millingSpeed, Vector<Double> drillingHeat, Vector<Double> drillingSpeed){
         this.millingHeat=millingHeat;
         this.millingSpeed=millingSpeed;
         this.drillingHeat=drillingHeat;

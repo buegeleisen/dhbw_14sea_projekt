@@ -8,10 +8,14 @@ import filereader.ERPFileReader;
 import main.Main;
 import mongoUI.MeteorMapper;
 import objects.*;
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.Producer;
+import org.apache.kafka.clients.producer.ProducerRecord;
 import scala.util.parsing.combinator.testing.Str;
 import spark.SparkProducer;
 import worker.Worker;
 
+import java.util.Properties;
 import java.util.Vector;
 
 /**
@@ -37,7 +41,6 @@ public class MyMachine{
     public static String DRILLING_SPEED="DRILLING_SPEED";
     public static String MILLING_HEAT="MILLING_HEAT";
     public static String MILLING_SPEED="MILLING_SPEED";
-    //public static String kill="kill";
 
     //States
     public static String preL1 = "preL1";
@@ -50,7 +53,6 @@ public class MyMachine{
     public static String preMilling = "preMilling";
     public static String preDrilling = "preDrilling";
     public static String finish = "finish";
-   // public static String dead="dead";
 
 
     private Gson gson = new Gson();
@@ -62,34 +64,11 @@ public class MyMachine{
     private  Activemqmessage activemqmessage= null;
     private  ERPFile erp;
 
-    public int id;
+    public String id;
 
     MeteorMapper meteorMapper = new MeteorMapper();
 
-    /*public MyMachine(){
-        config.configure(preL1).ignore(L1_false);
-        config.configure(preL1).permit(L1_true, preL2);
-        config.configure(preL2).ignore(L2_false);
-        config.configure(preL2).permit(L2_true, preMilling);
-        config.configure(preMilling).permit(L3_false, Milling);
-        config.configure(Milling).ignore(MILLING_true);
-        config.configure(Milling).ignore(MILLING_SPEED);
-        config.configure(Milling).ignore(MILLING_HEAT);
-        config.configure(Milling).permit(MILLING_false, preL3);
-        config.configure(preL3).permit(L3_true, preDrilling);
-        config.configure(preDrilling).permit(L4_false, Drilling);
-        config.configure(Drilling).ignore(DRILLING_true);
-        config.configure(Drilling).ignore(DRILLING_SPEED);
-        config.configure(Drilling).ignore(DRILLING_HEAT);
-        config.configure(Drilling).permit(DRILLING_false, preL4);
-        config.configure(preL4).permit(L4_true, preL5);
-        config.configure(preL5).ignore(L5_false);
-        config.configure(preL5).permit(L5_true, finish);
-        //config.configure(finish).permit(kill, dead);
-
-        this.stateMachine = new StateMachine<String, String>(preL1, config);
-    }*/
-    public MyMachine(int id){
+    public MyMachine(String id){
         config.configure(preL1).ignore(L1_false);
         config.configure(preL1).ignore(L2_false);
         config.configure(preL1).ignore(L2_true);
@@ -265,9 +244,6 @@ public class MyMachine{
     }
 
 
-    public void makeKafkaMessage(String message){
-        System.out.println("Statemachine received: "+message);
-    }
     public void setKafkaMessage(KafkaMessage kafkaMessage){
         kafkaMessages.add(kafkaMessage);
         if(kafkaMessage.getValue().equals("true") || kafkaMessage.getValue().equals("false")){
@@ -284,9 +260,6 @@ public class MyMachine{
             e.printStackTrace();
         }
         System.out.println("Aktueller Zustand(id: "+id+"): "+stateMachine.getState());
-        Gson gson= new Gson();
-        String kafkaOutput=gson.toJson(kafkaMessage);
-        //System.out.println(kafkaOutput);
     }
     public  void setActivemqmessage(Activemqmessage activemqmessage){
         this.activemqmessage = activemqmessage;
@@ -295,16 +268,11 @@ public class MyMachine{
         if(stateMachine.getState().equals("finish")){
             erp=e;
             Product product=createProduct(e,kafkaMessages,activemqmessage);
-            Gson gson=new Gson();
-            String jsonInString=gson.toJson(product);
-            //System.out.println("Produkt (products):"+jsonInString);
             meteorMapper.sendProduct(product);
             Worker.queue.removeFirst();
         }
     }
-    public  ERPFile getERPFile(){
-        return erp;
-    }
+
     private void sendToStatemachine(String s){
         KafkaMessage message = gson.fromJson(s, KafkaMessage.class);
         if(message.getValue().equals("true") || message.getValue().equals("false")){
@@ -313,6 +281,20 @@ public class MyMachine{
         }
     }
 
+    public void sparkFire(String message) {
+
+        Properties props = new Properties();
+
+        props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+        props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+        props.put("bootstrap.servers", "192.168.99.100:1002");
+
+        Producer<String, String> producer = new KafkaProducer<String, String>(props);
+        producer.send(new ProducerRecord<String, String>("spark", message)); //topic: spark
+        producer.close();
+        System.out.println("fertig");
+        //TOD: docker run --name sparkkafka -d -p 1003:2181 -p 1002:9092 --env ADVERTISED_HOST=192.168.99.100 --env ADVERTISED_PORT=1002 spotify/kafka
+    }
 
     public StateMachineConfig<String, String> getConfig() {
         return config;
@@ -323,26 +305,26 @@ public class MyMachine{
     }
 
     public Product createProduct(ERPFile e, Vector<KafkaMessage> kafkaMessages, Activemqmessage a){
-        Vector<String> millspeed=new Vector<String>();
-        Vector<String> millheat=new Vector<String>();
-        Vector<String> drillspeed=new Vector<String>();
-        Vector<String> drillheat=new Vector<String>();
+        Vector<Double> millspeed=new Vector<Double>();
+        Vector<Double> millheat=new Vector<Double>();
+        Vector<Double> drillspeed=new Vector<Double>();
+        Vector<Double> drillheat=new Vector<Double>();
         for(int i=0; i<kafkaMessages.size();i++){
             if(kafkaMessages.get(i).getItemName().equals("MILLING_SPEED")){
-                millspeed.add(kafkaMessages.get(i).getValue());
+                millspeed.add(Double.parseDouble(kafkaMessages.get(i).getValue()));
             }
             if(kafkaMessages.get(i).getItemName().equals("MILLING_HEAT")){
-                millheat.add(kafkaMessages.get(i).getValue());
+                millheat.add(Double.parseDouble(kafkaMessages.get(i).getValue()));
             }
             if(kafkaMessages.get(i).getItemName().equals("DRILLING_SPEED")){
-                drillspeed.add(kafkaMessages.get(i).getValue());
+                drillspeed.add(Double.parseDouble(kafkaMessages.get(i).getValue()));
             }
             if(kafkaMessages.get(i).getItemName().equals("DRILLING_HEAT")){
-                drillheat.add(kafkaMessages.get(i).getValue());
+                drillheat.add(Double.parseDouble(kafkaMessages.get(i).getValue()));
             }
         }
         ModifiedMessage m=new ModifiedMessage(millheat,millspeed,drillheat,drillspeed);
-        Product product=new Product(e,m,a);
+        Product product=new Product(this.id,e,m,a);
         return product;
     }
 
