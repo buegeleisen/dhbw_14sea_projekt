@@ -1,5 +1,5 @@
 buegeleisen/dhbw_14sea_projekt
-JA.COM
+J(ohannes Barth)A(rtur Front).C(hristina Wecker)O(nur Ali Göl)M(iguel Moreno) => JA.COM
 
 Das Repository enthält mehrere Dateiordner. Zu den wichtigsten gehören folgende Ordner:
 
