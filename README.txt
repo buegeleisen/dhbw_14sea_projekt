@@ -10,7 +10,7 @@ Diagramme
 Hier befinden sich eine Abbildung, die in einer Zwischenpräsentation verwendet wurde, das Klassendiagramm und zwei Zustandsdiagramme. Eines der Zustandsdiagramme betrachtet nur die Räume zwischen den Lichtschranken als Zustände. Das andere Diagramm sieht auch Milling und Drilling sowie jeweils die Phasen kurz davor als Zustände.
 
 Dockerfiles
-Hier befinden sich die Files, mit denen Dockercontainer erstellt wurden.
+Hier befinden sich die Files, mit denen Dockercontainer erstellt wurden. Leider ist keine Ausführung möglich, da es Fehler wegen fehlender Meteormodule gibt, die aber nicht installiert werden können, da es wiederum zu Fehlermeldungen kommt. Die Container können aber mit dem Befehl "docker-compose build" im Dockerordner aufgebaut werden. Dadurch kann ihr Aufbau live nachvollzogen werden.
 
 Portfolio
 Hier sind alle Zwischenpräsentationen und die Abschlusspräsentation als "Session3.pptx".
