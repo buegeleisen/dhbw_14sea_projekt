@@ -1,0 +1,241 @@
+html,body {
+    height:100%;
+    padding:0;
+    margin:0;
+}
+
+body{
+    height:100%;
+    color: black;
+    font-family:"Montserrat","Roboto Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
+    
+}
+
+a{
+    color: white;
+}
+
+h2{
+    text-transform: uppercase;
+    font-weight: 700;
+    line-height: 1.1;
+    color: inherit;
+    font-size: 40px;
+}
+
+h3.section-subheading {
+    font-size: 16px;
+    font-family: "Droid Serif","Helvetica Neue",Helvetica,Arial,sans-serif;
+    text-transform: none;
+    font-style: italic;
+    font-weight: 400;
+    margin-bottom: 75px;
+}
+
+section{
+    padding-top: 100px;
+}
+
+.b1{
+    background-color: #f7f7f7;
+}
+
+
+.navbar{
+    color: white;
+    background-color: black;
+    margin: 0;
+    border: none;
+}
+
+.intro{
+    width:100%;
+    height:100%;
+    text-align: center;
+    padding-top: 300px;
+    padding-bottom: 200px;
+    background: url(../img/header-barca2-middle.jpg) no-repeat center scroll;
+    background-size: cover;
+    color:white
+}
+
+.intro-text h1{
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 75px;
+    line-height: 75px;
+    margin-bottom: 50px;
+}
+
+@media(max-width:768px) {
+    .intro {
+        height: auto;
+        padding: 120px 0px;
+    }
+    
+    .intro-text h1{
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 50px;
+    margin-bottom: 40px;
+}
+        
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-xl:hover,
+.btn-xl:focus {
+    border: 1px solid white;
+    outline: 0 ;
+    color: black ;
+    background-color: white;
+}
+
+.btn-primary, .btn-xl{
+    background-color:  black;
+    color: white;
+}
+
+.btn-xl{
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 15px 40px;
+}
+
+.friends{
+    text-align: center;
+    margin-bottom:50px;
+    
+}
+
+.friends li a{
+    display: block;
+    background-color: Black;
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+    font-size: 20px;
+    line-height: 40px;
+    color: #fff;
+    outline:0;
+    -webkit-transition:all .3s;
+    -moz-transition:all .3s;
+    transition:all .3s;
+}
+
+.friends li a:hover,
+.friends li a:focus,
+.friends li a:active{
+    background-color:white;
+    color: black;
+}
+
+.friends img{
+    width: 255px;
+    height: auto;
+    margin:0 auto;
+    border:7px solid #fff;
+}
+
+.friends h4{
+    margin-top:25px;
+    margin-bottom:0;
+    text-transform:none
+}
+
+.friends p{
+    margin-top:0
+}
+
+.friends li:focus{
+    color: black;
+}
+
+.panel {
+    transition: box-shadow 0.5s;
+    margin-bottom: 100px;
+}
+
+.panel:hover {
+    box-shadow: 5px 0px 40px rgba(0,0,0, .5);
+}
+
+.panel-footer .btn:hover {
+    border: 1px solid black;
+    background-color: #fff !important;
+    color: black;
+}
+
+.panel-heading {
+    color: #fff !important;
+    background-color: black !important;
+    padding: 25px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.panel-footer {
+    text-align: center;
+    background-color: #fff !important;
+}
+
+.panel-footer h3 {
+    font-size: 32px;
+}
+
+.panel-footer h4 {
+    color: #aaa;
+    font-size: 14px;
+}
+
+.panel-footer .btn {
+    background-color: black;
+    color: #fff;
+}
+
+footer{
+    background-color: black;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+.slideanim, .frontslide {visibility:hidden;}
+.slide {
+    /* The name of the animation */
+    animation-name: slide;
+    -webkit-animation-name: slide; 
+    /* The duration of the animation */
+    animation-duration: 1s; 
+    -webkit-animation-duration: 1s;
+    /* Make the element visible */
+    visibility: visible; 
+}
+
+/* Go from 0% to 100% opacity (see-through) and specify the percentage from when to slide in the element along the Y-axis */
+@keyframes slide {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(70%);
+    } 
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0%);
+    } 
+}
+@-webkit-keyframes slide {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(70%);
+    } 
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0%);
+    }
+}
