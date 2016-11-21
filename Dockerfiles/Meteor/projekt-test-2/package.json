@@ -1,0 +1,22 @@
+{
+  "name": "projekt-test-2",
+  "private": true,
+  "scripts": {
+    "start": "meteor run"
+  },
+  "dependencies": {
+    "c3": "^0.4.11",
+    "chart.js": "^2.3.0",
+    "d3": "^3.5.0",
+    "meteor-node-stubs": "~0.2.0",
+    "react": "^15.4.0",
+    "react-addons-pure-render-mixin": "^15.4.0",
+    "react-bootstrap": "^0.30.6",
+    "react-chartjs-2": "^1.5.1",
+    "react-dom": "^15.4.0",
+    "react-easy-chart": "^0.1.12",
+    "react-faux-dom": "^2.5.0",
+    "react-fontawesome": "^1.2.0",
+    "react-mounter": "^1.2.0"
+  }
+}

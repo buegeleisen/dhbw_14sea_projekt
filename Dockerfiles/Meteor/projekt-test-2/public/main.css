@@ -1,0 +1,219 @@
+/* CSS declarations go here
+#689F38 good green
+
+*/
+
+html,body {
+    height:100%;
+    padding:0;
+    margin:0;
+}
+
+body{
+    height:100%;
+    color: black;
+    background-color: #222 !important;
+    font-family:"Montserrat",Helvetica,Arial,sans-serif;
+
+}
+
+.navbar-brand img{
+    width: auto;
+    height: auto;
+}
+
+.logo{
+  padding: 15px;
+  text-align: center;
+}
+
+.logo p{
+  display:inline;
+}
+
+.ja{
+  color: #D84315;
+}
+
+.com{
+  color: white;
+}
+
+.background{
+  height: 100%;
+  position: relative;
+  min-height: 350px;
+  background: url(data_center.jpg) no-repeat center scroll;
+  background-size: cover;
+}
+
+.intro{
+  height: 100%;
+    text-align: center;
+    padding-top: 200px;
+    padding-bottom: 200px;
+}
+
+.intro img{
+    width: 400px;
+    height: auto;
+}
+
+.intro h3{
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 50px;
+  line-height: 50px;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.navbar-inverse{
+  margin: 0px 0px 0px 0px;
+  border-radius: 0px;
+}
+
+.section{
+  background-color: #222;
+  color: white;
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 100px;
+}
+
+.section h1{
+  display: inline;
+}
+
+.item{
+  margin-top: 45px;
+}
+
+.sticker{
+  font-size: 50px;
+  color: #D84315;
+}
+
+
+.productList .panel{
+  margin-top: 20px;
+  margin-bottom: 0px;
+}
+
+.control-label{
+  color: white;
+}
+
+.myPanel{
+
+}
+
+.myPanel p{
+  margin: 0px;
+  display: inline;
+}
+
+.myPanel .click{
+  text-align: center;
+}
+
+.myPanel .glyphicon{
+  color: #D84315;
+}
+
+.machineConatiner{}
+
+@media(max-width: @screen-sm-min) {
+    .intro {
+        height: auto;
+        padding-top: 100px;
+    }
+
+}
+
+@media(max-width: ≥1200px) {
+    .intro {
+        height: auto;
+        padding-top: 100px;
+    }
+
+}
+
+
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-lg:hover,
+.btn-lg:focus {
+    border: 0px;
+    outline: 0 ;
+    color: #D84315 ;
+    background-color: white;
+}
+
+.btn-primary, .btn-lg{
+    background-color:  #D84315;
+    color: white;
+    border: 0px;
+}
+
+.btn-lg{
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 15px 40px;
+}
+
+h1.section-heading {
+    font-size: 36px;
+    color: white;
+    text-transform: none;
+    font-weight: 400;
+    text-align: center;
+}
+
+.panel {
+    transition: box-shadow 0.5s;
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+
+.panel:hover {
+    box-shadow: 5px 0px 40px rgba(255,255,255, .5);
+}
+
+.panel-footer .btn:hover {
+    border: 1px solid black;
+    background-color: #fff !important;
+    color: black;
+}
+
+.panel-heading {
+    color: #D84315 !important;
+    background-color: white !important;
+    padding: 25px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.panel-footer {
+    text-align: center;
+    background-color: #fff !important;
+}
+
+.panel-footer h3 {
+    font-size: 32px;
+}
+
+.panel-footer h4 {
+    color: #aaa;
+    font-size: 14px;
+}
+
+.panel-footer .btn {
+    background-color: black;
+    color: #fff;
+}

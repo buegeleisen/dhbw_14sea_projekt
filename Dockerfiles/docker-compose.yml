@@ -1,0 +1,29 @@
+version: '2'
+
+services:
+        kafka:
+            build: ./Kafka
+            ports:
+                - "1001:2181"
+                - "1000:9092"
+        activemq:
+            build: ./Activemq
+            ports:
+                - "32786:61616"
+        taktstrasse:
+            build: ./Taktstrasse
+            links:
+                - kafka
+                - activemq
+                - mongodb
+        mongodb:
+            build: ./MongoDB
+            ports:
+                - "3001:27017"
+        meteor:
+            build: ./Meteor
+            links:
+                - kafka
+                - mongodb
+            ports:
+                - "3000:80"
